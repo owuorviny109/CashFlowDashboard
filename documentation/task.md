@@ -3,6 +3,8 @@
 ## Phase 1: Foundation & Architecture
 - [x] **Project Initialization**
     - [x] Verify ASP.NET Core MVC project structure
+    - [x] Add UI Mockups (`dashboard`, `alerts`, `transaction`, `financial`)
+    - [x] Create Project Documentation & Roadmap (`task.md`)
     - [ ] Remove default Bootstrap links from `_Layout.cshtml`
     - [ ] Remove default `site.css` and `bootstrap` folder from `wwwroot`
     - [ ] Add Tailwind CDN script to `_Layout.cshtml` `<head>`

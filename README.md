@@ -86,4 +86,4 @@ To run this project locally, ensure you have the [.NET SDK](https://dotnet.micro
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
