@@ -1,0 +1,48 @@
+# Ignore Visual Studio temporary files, build outputs, and user-specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build directories
+[Bb]in/
+[Oo]bj/
+
+# Rider and VS Code settings
+.idea/
+.vscode/
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+
+# Publish outputs
+publish/
+*.publishsettings
+*.pubxml
+*.publishproj
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.db
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Other
+*.vsix
+*.[Rr]e[Ss]harper
+
+# Dotnet user secrets
+secrets.json
+
+# JetBrains Rider
+.idea/
+
+# Avoid committing local appsettings produced by tooling
+appsettings.*.Local.json
