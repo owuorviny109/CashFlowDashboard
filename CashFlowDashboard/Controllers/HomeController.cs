@@ -15,7 +15,8 @@ namespace CashFlowDashboard.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new ViewModels.DashboardViewModel();
+            return View(model);
         }
 
         public IActionResult Privacy()

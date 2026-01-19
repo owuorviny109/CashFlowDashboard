@@ -20,14 +20,14 @@
 ## Phase 2: Feature Views Migration
 
 ### Module A: Dashboard (Home)
-- [ ] **Setup**
-    - [ ] Locate `Views/Home/Index.cshtml`
-- [ ] **Content Migration**
-    - [ ] Copy **KPI Cards** (Total Balance, Income, Expenses)
-    - [ ] Copy **Chart Containers** (Cash Flow Trend)
-    - [ ] Copy **Recent Transactions** Widget
-- [ ] **Cleanup**
-    - [ ] Remove default "Welcome" text from template
+- [x] **Setup**
+    - [x] Locate `Views/Home/Index.cshtml`
+- [x] **Content Migration**
+    - [x] Copy **KPI Cards** (Total Balance, Income, Expenses)
+    - [x] Copy **Chart Containers** (Cash Flow Trend)
+    - [x] Copy **Recent Transactions** Widget
+- [x] **Cleanup**
+    - [x] Remove default "Welcome" text from template
 
 ### Module B: System Alerts
 - [ ] **Controller Setup**
