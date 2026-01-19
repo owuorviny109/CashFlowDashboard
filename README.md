@@ -42,6 +42,13 @@ This project is currently in its **MVP (minimum viable product)** phase, develop
 - ** Modern UI:** Built with **Tailwind CSS** for a professional, responsive mobile-first experience.
 - **Backend:** Powered by **ASP.NET Core MVC** for robust server-side logic.
 
+## Architecture Decisions (ADR)
+
+This project maintains a record of significant architectural choices to ensure design consistency and transparency:
+- [ADR 0001: Use Tailwind CSS via CDN](Docs/adr/0001-use-tailwind-cdn.md)
+- [ADR 0002: Server-Side Rendering Strategy](Docs/adr/0002-server-side-rendering-strategy.md)
+- [ADR 0003: Strict ViewModel Pattern](Docs/adr/0003-strict-viewmodel-pattern.md)
+
 ## Project Roadmap
 
 For a detailed breakdown of the development progress and module implementation status, please refer to the [Project Roadmap](Docs/task.md).
