@@ -1,0 +1,165 @@
+@model CashFlowDashboard.ViewModels.TransactionsViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<div class="flex-1 overflow-auto p-8 custom-scrollbar">
+    <!-- Stats / Filters Row -->
+    <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div class="flex gap-2">
+            <div class="relative inline-block text-left">
+                <button class="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white dark:bg-surface-dark px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700" type="button">
+                    This Month
+                    <span class="material-symbols-outlined text-slate-400 text-[20px]">expand_more</span>
+                </button>
+            </div>
+            <div class="relative inline-block text-left">
+                <button class="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white dark:bg-surface-dark px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700" type="button">
+                    <span class="material-symbols-outlined text-slate-500 dark:text-slate-400 text-[18px]">filter_list</span>
+                    Filter
+                </button>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <button class="flex items-center gap-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-slate-300 dark:border-slate-600 px-4 py-2 text-sm font-bold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+                <span class="material-symbols-outlined text-[20px]">file_download</span>
+                Export
+            </button>
+            <button class="flex items-center gap-2 rounded-lg bg-primary hover:bg-primary-dark text-white px-4 py-2 text-sm font-bold shadow-md transition-all hover:shadow-lg active:scale-95">
+                <span class="material-symbols-outlined text-[20px]">add</span>
+                Add Transaction
+            </button>
+        </div>
+    </div>
+    <!-- Table Container -->
+    <div class="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 bg-surface-light dark:bg-surface-dark shadow-sm">
+        <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+            <thead class="bg-slate-50 dark:bg-slate-800">
+                <tr>
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" scope="col">Date</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" scope="col">Description</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" scope="col">Category</th>
+                    <th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" scope="col">Type</th>
+                    <th class="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" scope="col">Amount</th>
+                    <th class="px-6 py-4 text-center text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 w-24" scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700 bg-surface-light dark:bg-surface-dark">
+                <!-- Row 1 -->
+                <tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="whitespace-nowrap px-6 py-4 text-sm text-slate-500 dark:text-slate-400">
+                        Oct 24, 2023
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-semibold text-slate-900 dark:text-white">SaaS Subscription</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-500">ID: #TXN-8832</span>
+                        </div>
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4">
+                        <span class="inline-flex items-center rounded-md bg-purple-50 dark:bg-purple-900/30 px-2 py-1 text-xs font-medium text-purple-700 dark:text-purple-300 ring-1 ring-inset ring-purple-700/10 dark:ring-purple-700/30">Software</span>
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4">
+                        <span class="flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
+                            <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span> Expense
+                        </span>
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-mono font-medium text-slate-900 dark:text-white">
+                        -$49.00
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-center">
+                        <button class="text-slate-400 hover:text-primary dark:hover:text-teal-400 transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">more_horiz</span>
+                        </button>
+                    </td>
+                </tr>
+                <!-- Row 2 -->
+                <tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="whitespace-nowrap px-6 py-4 text-sm text-slate-500 dark:text-slate-400">
+                        Oct 23, 2023
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-semibold text-slate-900 dark:text-white">Client Payment - #INV002</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-500">ID: #TXN-8831</span>
+                        </div>
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4">
+                        <span class="inline-flex items-center rounded-md bg-blue-50 dark:bg-blue-900/30 px-2 py-1 text-xs font-medium text-blue-700 dark:text-blue-300 ring-1 ring-inset ring-blue-700/10 dark:ring-blue-700/30">Sales</span>
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4">
+                        <span class="flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
+                            <span class="h-1.5 w-1.5 rounded-full bg-green-500"></span> Income
+                        </span>
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-mono font-medium text-primary dark:text-teal-400">
+                        +$1,250.00
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-center">
+                        <button class="text-slate-400 hover:text-primary dark:hover:text-teal-400 transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">more_horiz</span>
+                        </button>
+                    </td>
+                </tr>
+                <!-- Row 3 -->
+                <tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="whitespace-nowrap px-6 py-4 text-sm text-slate-500 dark:text-slate-400">
+                        Oct 21, 2023
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-semibold text-slate-900 dark:text-white">Office Supplies</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-500">ID: #TXN-8830</span>
+                        </div>
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4">
+                        <span class="inline-flex items-center rounded-md bg-slate-100 dark:bg-slate-700/50 px-2 py-1 text-xs font-medium text-slate-600 dark:text-slate-300 ring-1 ring-inset ring-slate-500/10 dark:ring-slate-500/30">Operations</span>
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4">
+                        <span class="flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
+                            <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span> Expense
+                        </span>
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-mono font-medium text-slate-900 dark:text-white">
+                        -$120.00
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 text-center">
+                        <button class="text-slate-400 hover:text-primary dark:hover:text-teal-400 transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">more_horiz</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Pagination -->
+        <div class="flex items-center justify-between border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark px-6 py-3">
+            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">
+                        Showing <span class="font-medium text-slate-900 dark:text-white">1</span> to <span class="font-medium text-slate-900 dark:text-white">4</span> of <span class="font-medium text-slate-900 dark:text-white">97</span> results
+                    </p>
+                </div>
+                <div>
+                    <nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+                        <a class="relative inline-flex items-center rounded-l-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 focus:z-20 focus:outline-offset-0" href="#">
+                            <span class="sr-only">Previous</span>
+                            <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+                        </a>
+                        <a aria-current="page" class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" href="#">1</a>
+                        <a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 focus:z-20 focus:outline-offset-0" href="#">2</a>
+                        <a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 focus:z-20 focus:outline-offset-0" href="#">3</a>
+                        <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-400 ring-1 ring-inset ring-slate-300 dark:ring-slate-600 focus:outline-offset-0">...</span>
+                        <a class="relative inline-flex items-center rounded-r-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 focus:z-20 focus:outline-offset-0" href="#">
+                            <span class="sr-only">Next</span>
+                            <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Placeholder (Hidden by default for now, can be toggled via JS later) -->
+<!-- ... Modal code omitted for brevity in Phase 1, can be added when JS interactivity is implemented ... -->

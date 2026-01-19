@@ -40,14 +40,14 @@
     - [x] Copy **Alert List Items** (Critical, Warning, Info, Success)
 
 ### Module C: Transactions
-- [ ] **Controller Setup**
-    - [ ] Create `Controllers/TransactionsController.cs`
-    - [ ] Add `Index()` action method
-- [ ] **View Implementation**
-    - [ ] Create folder `Views/Transactions`
-    - [ ] Create `Views/Transactions/Index.cshtml`
-    - [ ] Copy **Transaction Table** (Headers, Rows, Status Badges)
-    - [ ] Copy **Pagination Controls**
+- [x] **Controller Setup**
+    - [x] Create `Controllers/TransactionsController.cs`
+    - [x] Add `Index()` action method
+- [x] **View Implementation**
+    - [x] Create folder `Views/Transactions`
+    - [x] Create `Views/Transactions/Index.cshtml`
+    - [x] Copy **Transaction Table** (Headers, Rows, Status Badges)
+    - [x] Copy **Pagination Controls**
 
 ### Module D: Financial Forecast
 - [ ] **Controller Setup**
