@@ -42,6 +42,10 @@ This project is currently in its **MVP (minimum viable product)** phase, develop
 - ** Modern UI:** Built with **Tailwind CSS** for a professional, responsive mobile-first experience.
 - **Backend:** Powered by **ASP.NET Core MVC** for robust server-side logic.
 
+## Project Roadmap
+
+For a detailed breakdown of the development progress and module implementation status, please refer to the [Project Roadmap](Docs/task.md).
+
 ## How to Run
 
 To run this project locally, ensure you have the [.NET SDK](https://dotnet.microsoft.com/download) installed.
