@@ -5,16 +5,17 @@
     - [x] Verify ASP.NET Core MVC project structure
     - [x] Add UI Mockups (`dashboard`, `alerts`, `transaction`, `financial`)
     - [x] Create Project Documentation & Roadmap (`task.md`)
-    - [ ] Remove default Bootstrap links from `_Layout.cshtml`
-    - [ ] Remove default `site.css` and `bootstrap` folder from `wwwroot`
-    - [ ] Add Tailwind CDN script to `_Layout.cshtml` `<head>`
+    - [x] Establish Project Guardrails & Workflows (`setup_guardrails`, `create_adr`, `vertical_slice`)
+    - [x] Remove default Bootstrap links from `_Layout.cshtml`
+    - [x] Remove default `site.css` and `bootstrap` folder from `wwwroot`
+    - [x] Add Tailwind CDN script to `_Layout.cshtml` `<head>`
 
-- [ ] **Core Layout (Master Template)**
-    - [ ] Extract **Head Section** (Fonts: Manrope, Material Symbols)
-    - [ ] Extract **Sidebar Component** (Navigation Links)
-    - [ ] Extract **Top Header Component** (Search, User Profile)
-    - [ ] Implement `@RenderBody()` main content area
-    - [ ] Verify Mobile Responsive Menu Toggle logic
+- [x] **Core Layout (Master Template)**
+    - [x] Extract **Head Section** (Fonts: Manrope, Material Symbols)
+    - [x] Extract **Sidebar Component** (Navigation Links)
+    - [x] Extract **Top Header Component** (Search, User Profile)
+    - [x] Implement `@RenderBody()` main content area
+    - [x] Verify Mobile Responsive Menu Toggle logic (Layout structure ready)
 
 ## Phase 2: Feature Views Migration
 
