@@ -30,14 +30,14 @@
     - [x] Remove default "Welcome" text from template
 
 ### Module B: System Alerts
-- [ ] **Controller Setup**
-    - [ ] Create `Controllers/AlertsController.cs`
-    - [ ] Add `Index()` action method
-- [ ] **View Implementation**
-    - [ ] Create folder `Views/Alerts`
-    - [ ] Create `Views/Alerts/Index.cshtml`
-    - [ ] Copy **Filter Toolbar** (All, Critical, Warnings)
-    - [ ] Copy **Alert List Items** (Critical, Warning, Info, Success)
+- [x] **Controller Setup**
+    - [x] Create `Controllers/AlertsController.cs`
+    - [x] Add `Index()` action method
+- [x] **View Implementation**
+    - [x] Create folder `Views/Alerts`
+    - [x] Create `Views/Alerts/Index.cshtml`
+    - [x] Copy **Filter Toolbar** (All, Critical, Warnings)
+    - [x] Copy **Alert List Items** (Critical, Warning, Info, Success)
 
 ### Module C: Transactions
 - [ ] **Controller Setup**
