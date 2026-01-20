@@ -29,6 +29,8 @@ publish/
 *.sql
 *.sqlite
 *.db
+*.db-shm
+*.db-wal
 
 # OS files
 Thumbs.db
