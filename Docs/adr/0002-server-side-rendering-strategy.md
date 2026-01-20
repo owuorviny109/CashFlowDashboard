@@ -1,8 +1,5 @@
 # 2. Server-Side Rendering with ASP.NET Core MVC
 
-**Status**: Accepted
-**Date**: 2026-01-19
-
 ## Context
 Modern web application development often defaults to Single Page Application (SPA) architectures using frameworks like React, Angular, or Vue, communicating with a backend API.
 However, for a hackathon with strict time constraints (2 weeks), minimizing integration complexity is prioritized over creating a rich client-side application structure.
