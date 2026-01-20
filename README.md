@@ -48,6 +48,7 @@ This project maintains a record of significant architectural choices to ensure d
 - [ADR 0001: Use Tailwind CSS via CDN](Docs/adr/0001-use-tailwind-cdn.md)
 - [ADR 0002: Server-Side Rendering Strategy](Docs/adr/0002-server-side-rendering-strategy.md)
 - [ADR 0003: Strict ViewModel Pattern](Docs/adr/0003-strict-viewmodel-pattern.md)
+- [Backend Architecture Specification](Docs/backend-architecture.md)
 
 ## Project Roadmap
 
