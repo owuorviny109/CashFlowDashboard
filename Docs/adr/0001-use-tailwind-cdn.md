@@ -1,8 +1,5 @@
 # Use Tailwind CSS via CDN
 
-**Status**: Accepted
-**Date**: 2026-01-19
-
 ## Context
 Participating in a hackathon requires rapid UI iteration.
 Setting up a full Node.js/PostCSS build pipeline for Tailwind adds complexity and requires build steps that might slow down the "edit-refresh" cycle during rapid prototyping.

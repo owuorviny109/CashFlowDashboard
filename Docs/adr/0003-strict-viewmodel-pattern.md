@@ -1,8 +1,5 @@
 # 3. Strict ViewModel Pattern
 
-**Status**: Accepted
-**Date**: 2026-01-19
-
 ## Context
 In ASP.NET Core MVC, data can be passed from Controller to View in multiple ways:
 1. `ViewBag` / `ViewData` (Dynamic/Dictionary-based)
