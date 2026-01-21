@@ -247,95 +247,95 @@
 ## Phase 5: Repository Layer (Data Access Abstraction)
 
 ### 5.1 Create Repository Directory Structure
-- [ ] **Folder Setup**
-    - [ ] Create `Data/Repositories/` directory
-    - [ ] Create `Data/Repositories/Interfaces/` directory
+- [x] **Folder Setup**
+    - [x] Create `Data/Repositories/` directory
+    - [x] Create `Data/Repositories/Interfaces/` directory
 
 ### 5.2 Define Repository Interfaces
-- [ ] **5.2.1 ITransactionRepository**
-    - [ ] Create `Data/Repositories/Interfaces/ITransactionRepository.cs`
-        - [ ] Add `Task<Transaction?> GetByIdAsync(Guid id, CancellationToken ct)`
-        - [ ] Add `Task<IReadOnlyList<Transaction>> GetByDateRangeAsync(DateTime start, DateTime end, CancellationToken ct)`
-        - [ ] Add `Task<IReadOnlyList<Transaction>> GetRecentAsync(int count, CancellationToken ct)`
-        - [ ] Add `Task<decimal> GetBalanceAtDateAsync(DateTime date, CancellationToken ct)`
-        - [ ] Add `Task AddAsync(Transaction transaction, CancellationToken ct)`
-        - [ ] Add `Task UpdateAsync(Transaction transaction, CancellationToken ct)`
-        - [ ] Add `Task DeleteAsync(Guid id, CancellationToken ct)`
-        - [ ] Add `Task<bool> ExistsAsync(Guid id, CancellationToken ct)`
+- [x] **5.2.1 ITransactionRepository**
+    - [x] Create `Data/Repositories/Interfaces/ITransactionRepository.cs`
+        - [x] Add `Task<Transaction?> GetByIdAsync(Guid id, CancellationToken ct)`
+        - [x] Add `Task<IReadOnlyList<Transaction>> GetByDateRangeAsync(DateTime start, DateTime end, CancellationToken ct)`
+        - [x] Add `Task<IReadOnlyList<Transaction>> GetRecentAsync(int count, CancellationToken ct)`
+        - [x] Add `Task<decimal> GetBalanceAtDateAsync(DateTime date, CancellationToken ct)`
+        - [x] Add `Task AddAsync(Transaction transaction, CancellationToken ct)`
+        - [x] Add `Task UpdateAsync(Transaction transaction, CancellationToken ct)`
+        - [x] Add `Task DeleteAsync(Guid id, CancellationToken ct)`
+        - [x] Add `Task<bool> ExistsAsync(Guid id, CancellationToken ct)`
 
-- [ ] **5.2.2 IAlertRepository**
-    - [ ] Create `Data/Repositories/Interfaces/IAlertRepository.cs`
-        - [ ] Add `Task<Alert?> GetByIdAsync(Guid id, CancellationToken ct)`
-        - [ ] Add `Task<IReadOnlyList<Alert>> GetActiveAlertsAsync(CancellationToken ct)`
-        - [ ] Add `Task<IReadOnlyList<Alert>> GetBySeverityAsync(AlertSeverity severity, CancellationToken ct)`
-        - [ ] Add `Task<IReadOnlyList<Alert>> GetUnreadAsync(CancellationToken ct)`
-        - [ ] Add `Task AddAsync(Alert alert, CancellationToken ct)`
-        - [ ] Add `Task UpdateStatusAsync(Guid id, AlertStatus newStatus, CancellationToken ct)`
-        - [ ] Add `Task MarkAllAsReadAsync(CancellationToken ct)`
-        - [ ] Add `Task ArchiveOldAlertsAsync(DateTime olderThan, CancellationToken ct)`
+- [x] **5.2.2 IAlertRepository**
+    - [x] Create `Data/Repositories/Interfaces/IAlertRepository.cs`
+        - [x] Add `Task<Alert?> GetByIdAsync(Guid id, CancellationToken ct)`
+        - [x] Add `Task<IReadOnlyList<Alert>> GetActiveAlertsAsync(CancellationToken ct)`
+        - [x] Add `Task<IReadOnlyList<Alert>> GetBySeverityAsync(AlertSeverity severity, CancellationToken ct)`
+        - [x] Add `Task<IReadOnlyList<Alert>> GetUnreadAsync(CancellationToken ct)`
+        - [x] Add `Task AddAsync(Alert alert, CancellationToken ct)`
+        - [x] Add `Task UpdateStatusAsync(Guid id, AlertStatus newStatus, CancellationToken ct)`
+        - [x] Add `Task MarkAllAsReadAsync(CancellationToken ct)`
+        - [x] Add `Task ArchiveOldAlertsAsync(DateTime olderThan, CancellationToken ct)`
 
-- [ ] **5.2.3 ICashFlowSnapshotRepository**
-    - [ ] Create `Data/Repositories/Interfaces/ICashFlowSnapshotRepository.cs`
-        - [ ] Add `Task<CashFlowSnapshot?> GetByDateAsync(DateOnly date, CancellationToken ct)`
-        - [ ] Add `Task<IReadOnlyList<CashFlowSnapshot>> GetRangeAsync(DateOnly start, DateOnly end, CancellationToken ct)`
-        - [ ] Add `Task AddAsync(CashFlowSnapshot snapshot, CancellationToken ct)`
+- [x] **5.2.3 ICashFlowSnapshotRepository**
+    - [x] Create `Data/Repositories/Interfaces/ICashFlowSnapshotRepository.cs`
+        - [x] Add `Task<CashFlowSnapshot?> GetByDateAsync(DateOnly date, CancellationToken ct)`
+        - [x] Add `Task<IReadOnlyList<CashFlowSnapshot>> GetRangeAsync(DateOnly start, DateOnly end, CancellationToken ct)`
+        - [x] Add `Task AddAsync(CashFlowSnapshot snapshot, CancellationToken ct)`
 
-- [ ] **5.2.4 IForecastRepository**
-    - [ ] Create `Data/Repositories/Interfaces/IForecastRepository.cs`
-        - [ ] Add `Task<ForecastScenario?> GetByIdAsync(Guid id, CancellationToken ct)`
-        - [ ] Add `Task<IReadOnlyList<ForecastScenario>> GetActiveScenariosAsync(CancellationToken ct)`
-        - [ ] Add `Task AddAsync(ForecastScenario forecast, CancellationToken ct)`
-        - [ ] Add `Task UpdateAsync(ForecastScenario forecast, CancellationToken ct)`
-        - [ ] Add `Task DeactivateOldScenariosAsync(DateTime olderThan, CancellationToken ct)`
+- [x] **5.2.4 IForecastRepository**
+    - [x] Create `Data/Repositories/Interfaces/IForecastRepository.cs`
+        - [x] Add `Task<ForecastScenario?> GetByIdAsync(Guid id, CancellationToken ct)`
+        - [x] Add `Task<IReadOnlyList<ForecastScenario>> GetActiveScenariosAsync(CancellationToken ct)`
+        - [x] Add `Task AddAsync(ForecastScenario forecast, CancellationToken ct)`
+        - [x] Add `Task UpdateAsync(ForecastScenario forecast, CancellationToken ct)`
+        - [x] Add `Task DeactivateOldScenariosAsync(DateTime olderThan, CancellationToken ct)`
 
 ### 5.3 Implement Repository Classes (EF Core)
-- [ ] **5.3.1 TransactionRepository**
-    - [ ] Create `Data/Repositories/TransactionRepository.cs`
-        - [ ] Inject `CashFlowDbContext` via constructor
-        - [ ] Implement `GetByIdAsync()` using `FindAsync()`
-        - [ ] Implement `GetByDateRangeAsync()` with `.Where().OrderByDescending()`
-        - [ ] Implement `GetRecentAsync()` with `.OrderByDescending().Take()`
-        - [ ] Implement `GetBalanceAtDateAsync()` (sum all transactions up to date)
-        - [ ] Implement `AddAsync()` using `AddAsync()` + `SaveChangesAsync()`
-        - [ ] Implement `UpdateAsync()` using `Update()` + `SaveChangesAsync()`
-        - [ ] Implement `DeleteAsync()` using `Remove()` + `SaveChangesAsync()`
-        - [ ] Implement `ExistsAsync()` using `AnyAsync()`
-        - [ ] Use `.AsNoTracking()` for read-only queries
+- [x] **5.3.1 TransactionRepository**
+    - [x] Create `Data/Repositories/TransactionRepository.cs`
+        - [x] Inject `CashFlowDbContext` via constructor
+        - [x] Implement `GetByIdAsync()` using `FindAsync()`
+        - [x] Implement `GetByDateRangeAsync()` with `.Where().OrderByDescending()`
+        - [x] Implement `GetRecentAsync()` with `.OrderByDescending().Take()`
+        - [x] Implement `GetBalanceAtDateAsync()` (sum all transactions up to date)
+        - [x] Implement `AddAsync()` using `AddAsync()` + `SaveChangesAsync()`
+        - [x] Implement `UpdateAsync()` using `Update()` + `SaveChangesAsync()`
+        - [x] Implement `DeleteAsync()` using `Remove()` + `SaveChangesAsync()`
+        - [x] Implement `ExistsAsync()` using `AnyAsync()`
+        - [x] Use `.AsNoTracking()` for read-only queries
 
-- [ ] **5.3.2 AlertRepository**
-    - [ ] Create `Data/Repositories/AlertRepository.cs`
-        - [ ] Inject `CashFlowDbContext` via constructor
-        - [ ] Implement `GetByIdAsync()` using `FindAsync()`
-        - [ ] Implement `GetActiveAlertsAsync()` (filter by Status != Resolved, Dismissed)
-        - [ ] Implement `GetBySeverityAsync()` with `.Where()`
-        - [ ] Implement `GetUnreadAsync()` (filter by Status == Unread)
-        - [ ] Implement `AddAsync()`
-        - [ ] Implement `UpdateStatusAsync()` (load entity, update Status, save)
-        - [ ] Implement `MarkAllAsReadAsync()` (ExecuteUpdateAsync on all unread)
-        - [ ] Implement `ArchiveOldAlertsAsync()` (update Status or delete)
+- [x] **5.3.2 AlertRepository**
+    - [x] Create `Data/Repositories/AlertRepository.cs`
+        - [x] Inject `CashFlowDbContext` via constructor
+        - [x] Implement `GetByIdAsync()` using `FindAsync()`
+        - [x] Implement `GetActiveAlertsAsync()` (filter by Status != Resolved, Dismissed)
+        - [x] Implement `GetBySeverityAsync()` with `.Where()`
+        - [x] Implement `GetUnreadAsync()` (filter by Status == Unread)
+        - [x] Implement `AddAsync()`
+        - [x] Implement `UpdateStatusAsync()` (load entity, update Status, save)
+        - [x] Implement `MarkAllAsReadAsync()` (ExecuteUpdateAsync on all unread)
+        - [x] Implement `ArchiveOldAlertsAsync()` (update Status or delete)
 
-- [ ] **5.3.3 CashFlowSnapshotRepository**
-    - [ ] Create `Data/Repositories/CashFlowSnapshotRepository.cs`
-        - [ ] Inject `CashFlowDbContext` via constructor
-        - [ ] Implement `GetByDateAsync()` using `FirstOrDefaultAsync()`
-        - [ ] Implement `GetRangeAsync()` with `.Where().OrderBy()`
-        - [ ] Implement `AddAsync()`
+- [x] **5.3.3 CashFlowSnapshotRepository**
+    - [x] Create `Data/Repositories/CashFlowSnapshotRepository.cs`
+        - [x] Inject `CashFlowDbContext` via constructor
+        - [x] Implement `GetByDateAsync()` using `FirstOrDefaultAsync()`
+        - [x] Implement `GetRangeAsync()` with `.Where().OrderBy()`
+        - [x] Implement `AddAsync()`
 
-- [ ] **5.3.4 ForecastRepository**
-    - [ ] Create `Data/Repositories/ForecastRepository.cs`
-        - [ ] Inject `CashFlowDbContext` via constructor
-        - [ ] Implement `GetByIdAsync()` (include DataPoints collection)
-        - [ ] Implement `GetActiveScenariosAsync()` (filter by IsActive == true)
-        - [ ] Implement `AddAsync()`
-        - [ ] Implement `UpdateAsync()`
-        - [ ] Implement `DeactivateOldScenariosAsync()`
+- [x] **5.3.4 ForecastRepository**
+    - [x] Create `Data/Repositories/ForecastRepository.cs`
+        - [x] Inject `CashFlowDbContext` via constructor
+        - [x] Implement `GetByIdAsync()` (include DataPoints collection)
+        - [x] Implement `GetActiveScenariosAsync()` (filter by IsActive == true)
+        - [x] Implement `AddAsync()`
+        - [x] Implement `UpdateAsync()`
+        - [x] Implement `DeactivateOldScenariosAsync()`
 
 ### 5.4 Register Repositories in DI Container
-- [ ] **Update Program.cs**
-    - [ ] Add `builder.Services.AddScoped<ITransactionRepository, TransactionRepository>()`
-    - [ ] Add `builder.Services.AddScoped<IAlertRepository, AlertRepository>()`
-    - [ ] Add `builder.Services.AddScoped<ICashFlowSnapshotRepository, CashFlowSnapshotRepository>()`
-    - [ ] Add `builder.Services.AddScoped<IForecastRepository, ForecastRepository>()`
+- [x] **Update Program.cs**
+    - [x] Add `builder.Services.AddScoped<ITransactionRepository, TransactionRepository>()`
+    - [x] Add `builder.Services.AddScoped<IAlertRepository, AlertRepository>()`
+    - [x] Add `builder.Services.AddScoped<ICashFlowSnapshotRepository, CashFlowSnapshotRepository>()`
+    - [x] Add `builder.Services.AddScoped<IForecastRepository, ForecastRepository>()`
 
 ---
 

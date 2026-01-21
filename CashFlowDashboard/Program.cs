@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using CashFlowDashboard.Data.Repositories;
+using CashFlowDashboard.Data.Repositories.Interfaces;
 
 namespace CashFlowDashboard
 {
@@ -14,6 +16,12 @@ namespace CashFlowDashboard
             // Register Entity Framework Core DbContext
             builder.Services.AddDbContext<CashFlowDashboard.Data.CashFlowDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Register Repositories
+            builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+            builder.Services.AddScoped<IAlertRepository, AlertRepository>();
+            builder.Services.AddScoped<ICashFlowSnapshotRepository, CashFlowSnapshotRepository>();
+            builder.Services.AddScoped<IForecastRepository, ForecastRepository>();
 
             var app = builder.Build();
 
