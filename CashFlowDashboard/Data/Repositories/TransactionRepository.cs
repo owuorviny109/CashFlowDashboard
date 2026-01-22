@@ -50,13 +50,19 @@ public class TransactionRepository : ITransactionRepository
             .AsNoTracking()
             .Where(t => t.Date <= date);
 
-        var income = await query
-            .Where(t => t.Type == TransactionType.Income)
-            .SumAsync(t => t.Amount, ct);
+        // Fix for SQLite "Cannot apply aggregate operator Sum on decimal" error
+        // We project only what we need (Type, Amount) and sum in memory.
+        var transactions = await query
+            .Select(t => new { t.Type, t.Amount })
+            .ToListAsync(ct);
 
-        var expense = await query
+        var income = transactions
+            .Where(t => t.Type == TransactionType.Income)
+            .Sum(t => t.Amount);
+
+        var expense = transactions
             .Where(t => t.Type == TransactionType.Expense)
-            .SumAsync(t => t.Amount, ct);
+            .Sum(t => t.Amount);
 
         return income - expense;
     }

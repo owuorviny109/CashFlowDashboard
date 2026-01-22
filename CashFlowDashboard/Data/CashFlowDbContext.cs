@@ -1,4 +1,5 @@
 using CashFlowDashboard.Models.Entities;
+using CashFlowDashboard.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CashFlowDashboard.Data;
@@ -23,6 +24,9 @@ public sealed class CashFlowDbContext : DbContext
 
     // Forecast scenarios table (time-series projections).
     public DbSet<ForecastScenario> Forecasts => Set<ForecastScenario>();
+
+    // Application settings table (alert thresholds, forecast intervals).
+    public DbSet<AppSetting> AppSettings => Set<AppSetting>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

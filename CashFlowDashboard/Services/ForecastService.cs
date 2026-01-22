@@ -152,13 +152,14 @@ public class ForecastService : IForecastService
             // Theory: Random Walk. Uncertainty grows with square root of time (Sqrt(t)).
             decimal width = 2 * stdDev * (decimal)Math.Sqrt(i);
 
-            dataPoints.Add(new ForecastDataPoint(
-                Date: DateOnly.FromDateTime(DateTime.Today.AddDays(i)),
-                ProjectedBalance: runningBalance,
-                LowerBound: runningBalance - width,
-                UpperBound: runningBalance + width,
-                Confidence: 0.95m 
-            ));
+            dataPoints.Add(new ForecastDataPoint
+            {
+                Date = DateOnly.FromDateTime(DateTime.Today.AddDays(i)),
+                ProjectedBalance = runningBalance,
+                LowerBound = runningBalance - width,
+                UpperBound = runningBalance + width,
+                Confidence = 0.95m 
+            });
         }
 
         // 4. Build Scenario

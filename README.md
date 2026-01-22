@@ -39,6 +39,7 @@ This project is currently in its **MVP (minimum viable product)** phase, develop
 - ** Transaction Management:** Easy-to-use interface to Add, Edit, and List income and expenses.
 - ** Forecast Visualization:** A dedicated view showing projected cash availability.
 - ** Alerts System:** A notification center for critical financial warnings.
+- ** User Configuration:** Adjustable settings for forecast horizons, alert thresholds, and scenarios.
 - ** Modern UI:** Built with **Tailwind CSS** for a professional, responsive mobile-first experience.
 - **Backend:** Powered by **ASP.NET Core MVC** for robust server-side logic.
 

@@ -1,0 +1,105 @@
+@model List<CashFlowDashboard.Models.AppSetting>
+
+@{
+    ViewData["Title"] = "System Settings";
+}
+
+<div class="flex flex-col gap-6">
+    <!-- Header -->
+    <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">System Settings</h1>
+            <p class="text-slate-500 dark:text-slate-400 mt-1">Configure thresholds, forecasting parameters, and system behaviors.</p>
+        </div>
+        <a asp-controller="Home" asp-action="Index" class="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark transition-colors bg-primary/10 px-4 py-2 rounded-lg">
+            <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+            Back to Dashboard
+        </a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900/30 text-green-700 dark:text-green-300 flex items-center gap-3 shadow-subtle">
+            <span class="material-symbols-outlined filled">check_circle</span>
+            <span class="text-sm font-bold">@TempData["SuccessMessage"]</span>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/30 text-red-700 dark:text-red-300 flex items-center gap-3 shadow-subtle">
+            <span class="material-symbols-outlined filled">error</span>
+            <span class="text-sm font-bold">@TempData["ErrorMessage"]</span>
+        </div>
+    }
+
+    <form method="post" asp-action="Update" class="flex flex-col gap-6">
+        @Html.AntiForgeryToken()
+
+        <!-- Group: Alerts -->
+        <div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-subtle overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex items-center gap-3">
+                <div class="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
+                    <span class="material-symbols-outlined text-amber-500 dark:text-amber-400">notifications_active</span>
+                </div>
+                <div>
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white">Alert Thresholds</h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Define conditions for system notifications.</p>
+                </div>
+            </div>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                @foreach (var setting in Model.Where(s => s.Key.StartsWith("Alerts:")))
+                {
+                    <div class="space-y-2">
+                        <label for="@setting.Key" class="block text-sm font-bold text-slate-700 dark:text-slate-300">
+                             @System.Text.RegularExpressions.Regex.Replace(setting.Key.Replace("Alerts:", ""), "(\\B[A-Z])", " $1")
+                        </label>
+                        <div class="relative">
+                            @if (setting.Key.Contains("Threshold"))
+                            {
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium select-none">$</span>
+                            }
+                            <input type="text" name="settings[@setting.Key]" id="@setting.Key" value="@setting.Value" 
+                                   class="block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm @(setting.Key.Contains("Threshold") ? "pl-7" : "") font-medium" />
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">@setting.Description</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Group: Forecast -->
+        <div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-subtle overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex items-center gap-3">
+                <div class="p-2 bg-primary/10 rounded-lg">
+                    <span class="material-symbols-outlined text-primary">ssid_chart</span>
+                </div>
+                <div>
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white">Forecasting Parameters</h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Calibrate the prediction engine intervals and logic.</p>
+                </div>
+            </div>
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                @foreach (var setting in Model.Where(s => s.Key.StartsWith("Forecast:")))
+                {
+                    <div class="space-y-2">
+                        <label for="@setting.Key" class="block text-sm font-bold text-slate-700 dark:text-slate-300">
+                             @System.Text.RegularExpressions.Regex.Replace(setting.Key.Replace("Forecast:", ""), "(\\B[A-Z])", " $1")
+                        </label>
+                        <input type="text" name="settings[@setting.Key]" id="@setting.Key" value="@setting.Value" 
+                               class="block w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm font-medium" />
+                        <p class="text-xs text-slate-500 dark:text-slate-400">@setting.Description</p>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Save Button -->
+        <div class="flex justify-end pt-2 pb-8">
+            <button type="submit" class="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-xl font-bold shadow-md hover:shadow-lg transition-all active:scale-95">
+                <span class="material-symbols-outlined">save</span>
+                Save Changes
+            </button>
+        </div>
+    </form>
+</div>
