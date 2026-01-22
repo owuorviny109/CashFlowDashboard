@@ -1,7 +1,13 @@
+using CashFlowDashboard.Services.DTOs;
+
 namespace CashFlowDashboard.ViewModels;
 
 public sealed class AlertsViewModel
 {
-    // In the future, this will hold list of Alerts
-    public string PageTitle { get; init; } = "System Alerts";
+    // Grouped by time for better UX
+    public IReadOnlyList<AlertDto> TodayAlerts { get; init; } = Array.Empty<AlertDto>();
+    public IReadOnlyList<AlertDto> YesterdayAlerts { get; init; } = Array.Empty<AlertDto>();
+    public IReadOnlyList<AlertDto> OlderAlerts { get; init; } = Array.Empty<AlertDto>();
+    
+    public int UnreadCount { get; init; }
 }

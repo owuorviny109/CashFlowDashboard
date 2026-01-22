@@ -527,94 +527,94 @@
 ## Phase 7: Presentation Integration (Wire Controllers & Update Views)
 
 ### 7.1 Update ViewModels with Real Properties
-- [ ] **7.1.1 Update DashboardViewModel**
-    - [ ] Open `ViewModels/DashboardViewModel.cs`
-    - [ ] Replace placeholder properties with:
-        - [ ] `decimal CurrentBalance { get; init; }`
-        - [ ] `decimal BalanceChangePercent { get; init; }`
-        - [ ] `decimal NetCashFlow30Day { get; init; }`
-        - [ ] `decimal ForecastGrowth60Day { get; init; }`
-        - [ ] `int ActiveAlertCount { get; init; }`
-        - [ ] `IReadOnlyList<ChartDataPoint> HistoricalChartData { get; init; }`
-        - [ ] `IReadOnlyList<ChartDataPoint> ProjectedChartData { get; init; }`
-        - [ ] `IReadOnlyList<AlertDto> RecentAlerts { get; init; }`
+- [x] **7.1.1 Update DashboardViewModel**
+    - [x] Open `ViewModels/DashboardViewModel.cs`
+    - [x] Replace placeholder properties with:
+        - [x] `decimal CurrentBalance { get; init; }`
+        - [x] `decimal BalanceChangePercent { get; init; }`
+        - [x] `decimal NetCashFlow30Day { get; init; }`
+        - [x] `decimal ForecastGrowth60Day { get; init; }`
+        - [x] `int ActiveAlertCount { get; init; }`
+        - [x] `IReadOnlyList<ChartDataPoint> HistoricalChartData { get; init; }`
+        - [x] `IReadOnlyList<ChartDataPoint> ProjectedChartData { get; init; }`
+        - [x] `IReadOnlyList<AlertDto> RecentAlerts { get; init; }`
 
-- [ ] **7.1.2 Update AlertsViewModel**
-    - [ ] Open `ViewModels/AlertsViewModel.cs`
-    - [ ] Add properties:
-        - [ ] `IReadOnlyList<AlertDto> TodayAlerts { get; init; }`
-        - [ ] `IReadOnlyList<AlertDto> YesterdayAlerts { get; init; }`
-        - [ ] `IReadOnlyList<AlertDto> OlderAlerts { get; init; }`
-        - [ ] `int UnreadCount { get; init; }`
+- [x] **7.1.2 Update AlertsViewModel**
+    - [x] Open `ViewModels/AlertsViewModel.cs`
+    - [x] Add properties:
+        - [x] `IReadOnlyList<AlertDto> TodayAlerts { get; init; }`
+        - [x] `IReadOnlyList<AlertDto> YesterdayAlerts { get; init; }`
+        - [x] `IReadOnlyList<AlertDto> OlderAlerts { get; init; }`
+        - [x] `int UnreadCount { get; init; }`
 
-- [ ] **7.1.3 Update TransactionsViewModel**
-    - [ ] Open `ViewModels/TransactionsViewModel.cs`
-    - [ ] Add properties:
-        - [ ] `IReadOnlyList<TransactionDto> Transactions { get; init; }`
-        - [ ] `int TotalCount { get; init; }`
-        - [ ] `int CurrentPage { get; init; }`
-        - [ ] `int PageSize { get; init; }`
+- [x] **7.1.3 Update TransactionsViewModel**
+    - [x] Open `ViewModels/TransactionsViewModel.cs`
+    - [x] Add properties:
+        - [x] `IReadOnlyList<TransactionDto> Transactions { get; init; }`
+        - [x] `int TotalCount { get; init; }`
+        - [x] `int CurrentPage { get; init; }`
+        - [x] `int PageSize { get; init; }`
 
-- [ ] **7.1.4 Update ForecastViewModel**
-    - [ ] Open `ViewModels/ForecastViewModel.cs`
-    - [ ] Add properties:
-        - [ ] `ForecastScenarioDto ActiveScenario { get; init; }`
-        - [ ] `IReadOnlyList<ForecastScenarioDto> AllScenarios { get; init; }`
-        - [ ] `decimal EndCashBalance { get; init; }`
-        - [ ] `decimal BurnRatePerMonth { get; init; }`
-        - [ ] `decimal GrowthRate { get; init; }`
+- [x] **7.1.4 Update ForecastViewModel**
+    - [x] Open `ViewModels/ForecastViewModel.cs`
+    - [x] Add properties:
+        - [x] `ForecastScenarioDto ActiveScenario { get; init; }`
+        - [x] `IReadOnlyList<ForecastScenarioDto> AllScenarios { get; init; }`
+        - [x] `decimal EndCashBalance { get; init; }`
+        - [x] `decimal BurnRatePerMonth { get; init; }`
+        - [x] `decimal GrowthRate { get; init; }`
 
 ### 7.2 Update Controllers to Call Services
-- [ ] **7.2.1 Update HomeController (Dashboard)**
-    - [ ] Open `Controllers/HomeController.cs`
-    - [ ] Inject services: `ICashFlowAnalyticsService`, `IAlertService`, `IForecastService`
-    - [ ] Update `Index()` action method:
-        - [ ] Change signature to `async Task<IActionResult> Index(CancellationToken ct)`
-        - [ ] Call `await _analyticsService.GetCurrentBalanceAsync(ct)`
-        - [ ] Call `await _analyticsService.GetGrowthMetricsAsync(ct)`
-        - [ ] Call `await _analyticsService.GetTrendForPeriodAsync()` (last 6 months)
-        - [ ] Call `await _alertService.GetActiveAlertsAsync(ct)`
-        - [ ] Call `await _forecastService.GetActiveForecastsAsync(ct)` (for forecast growth)
-        - [ ] Populate `DashboardViewModel` with real data
-        - [ ] Return `View(model)`
+- [x] **7.2.1 Update HomeController (Dashboard)**
+    - [x] Open `Controllers/HomeController.cs`
+    - [x] Inject services: `ICashFlowAnalyticsService`, `IAlertService`, `IForecastService`
+    - [x] Update `Index()` action method:
+        - [x] Change signature to `async Task<IActionResult> Index(CancellationToken ct)`
+        - [x] Call `await _analyticsService.GetCurrentBalanceAsync(ct)`
+        - [x] Call `await _analyticsService.GetGrowthMetricsAsync(ct)`
+        - [x] Call `await _analyticsService.GetTrendForPeriodAsync()` (last 6 months)
+        - [x] Call `await _alertService.GetActiveAlertsAsync(ct)`
+        - [x] Call `await _forecastService.GetActiveForecastsAsync(ct)` (for forecast growth)
+        - [x] Populate `DashboardViewModel` with real data
+        - [x] Return `View(model)`
 
-- [ ] **7.2.2 Update AlertsController**
-    - [ ] Open `Controllers/AlertsController.cs`
-    - [ ] Inject `IAlertService`
-    - [ ] Update `Index()` action:
-        - [ ] Change to async
-        - [ ] Call `await _alertService.GetActiveAlertsAsync(ct)`
-        - [ ] Group alerts by date (Today, Yesterday, Older)
-        - [ ] Populate `AlertsViewModel`
-        - [ ] Return `View(model)`
-    - [ ] Add `[HttpPost] MarkAsRead(Guid id)` action
-        - [ ] Call service method
-        - [ ] Redirect to Index
-    - [ ] Add `[HttpPost] MarkAllAsRead()` action
+- [x] **7.2.2 Update AlertsController**
+    - [x] Open `Controllers/AlertsController.cs`
+    - [x] Inject `IAlertService`
+    - [x] Update `Index()` action:
+        - [x] Change to async
+        - [x] Call `await _alertService.GetActiveAlertsAsync(ct)`
+        - [x] Group alerts by date (Today, Yesterday, Older)
+        - [x] Populate `AlertsViewModel`
+        - [x] Return `View(model)`
+    - [x] Add `[HttpPost] MarkAsRead(Guid id)` action
+        - [x] Call service method
+        - [x] Redirect to Index
+    - [x] Add `[HttpPost] MarkAllAsRead()` action
 
-- [ ] **7.2.3 Update TransactionsController**
-    - [ ] Open `Controllers/TransactionsController.cs`
-    - [ ] Inject `ITransactionService`
-    - [ ] Update `Index()` action:
-        - [ ] Add pagination parameters (page, pageSize)
-        - [ ] Call `await _transactionService.GetRecentTransactionsAsync()`
-        - [ ] Populate `TransactionsViewModel`
-        - [ ] Return `View(model)`
-    - [ ] Add `[HttpPost] Create(CreateTransactionCommand cmd)` action
-        - [ ] Validate model
-        - [ ] Call service CreateTransactionAsync
-        - [ ] Redirect to Index
-    - [ ] Add `[HttpPost] Delete(Guid id)` action
+- [x] **7.2.3 Update TransactionsController**
+    - [x] Open `Controllers/TransactionsController.cs`
+    - [x] Inject `ITransactionService`
+    - [x] Update `Index()` action:
+        - [x] Add pagination parameters (page, pageSize)
+        - [x] Call `await _transactionService.GetRecentTransactionsAsync()`
+        - [x] Populate `TransactionsViewModel`
+        - [x] Return `View(model)`
+    - [x] Add `[HttpPost] Create(CreateTransactionCommand cmd)` action
+        - [x] Validate model
+        - [x] Call service CreateTransactionAsync
+        - [x] Redirect to Index
+    - [x] Add `[HttpPost] Delete(Guid id)` action
 
-- [ ] **7.2.4 Update ForecastController**
-    - [ ] Open `Controllers/ForecastController.cs`
-    - [ ] Inject `IForecastService`, `ICashFlowAnalyticsService`
-    - [ ] Update `Index()` action:
-        - [ ] Call `await _forecastService.GetActiveForecastsAsync(ct)`
-        - [ ] Call `await _analyticsService.GetGrowthMetricsAsync(ct)` (for burn rate)
-        - [ ] Populate `ForecastViewModel`
-        - [ ] Return `View(model)`
-    - [ ] Add `[HttpPost] GenerateForecast(ScenarioType type, int daysAhead)` action
+- [x] **7.2.4 Update ForecastController**
+    - [x] Open `Controllers/ForecastController.cs`
+    - [x] Inject `IForecastService`, `ICashFlowAnalyticsService`
+    - [x] Update `Index()` action:
+        - [x] Call `await _forecastService.GetActiveForecastsAsync(ct)`
+        - [x] Call `await _analyticsService.GetGrowthMetricsAsync(ct)` (for burn rate)
+        - [x] Populate `ForecastViewModel`
+        - [x] Return `View(model)`
+    - [x] Add `[HttpPost] GenerateForecast(ScenarioType type, int daysAhead)` action
 
 ### 7.3 Update Razor Views to Bind Real Data
 - [ ] **7.3.1 Update Dashboard View**
