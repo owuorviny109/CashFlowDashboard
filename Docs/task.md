@@ -617,29 +617,33 @@
     - [x] Add `[HttpPost] GenerateForecast(ScenarioType type, int daysAhead)` action
 
 ### 7.3 Update Razor Views to Bind Real Data
-- [ ] **7.3.1 Update Dashboard View**
-    - [ ] Open `Views/Home/Index.cshtml`
-    - [ ] Replace hardcoded values:
-        - [ ] Line 18: Change `$1,240,500` to `@Model.CurrentBalance.ToString("C")`
-        - [ ] Line 15: Change `+4.2%` to `@Model.BalanceChangePercent.ToString("P1")`
-        - [ ] Line 29: Change `$85,200` to `@Model.NetCashFlow30Day.ToString("C")`
-        - [ ] Line 40: Change `+12.5%` to `@Model.ForecastGrowth60Day.ToString("P1")`
-        - [ ] Line 51: Change `3 Items` to `@Model.ActiveAlertCount Items`
-    - [ ] Update chart section (lines 72-95):
-        - [ ] Replace static SVG paths with dynamic data from `@Model.HistoricalChartData`
-        - [ ] Use `@foreach` loop to render data points
-    - [ ] Update recent alerts section (lines 149-174):
-        - [ ] Replace hardcoded alerts with `@foreach(var alert in Model.RecentAlerts)`
-        - [ ] Bind `alert.Title`, `alert.Message`, `alert.TimeAgo`
+- [x] **7.3.1 Update Dashboard View**
+    - [x] Replaced hardcoded KPI values with Model bindings
+    - [x] Integrated Chart.js for data visualization
+    - [x] Bound H
 
-- [ ] **7.3.2 Update Alerts View**
-    - [ ] Open `Views/Alerts/Index.cshtml`
-    - [ ] Replace hardcoded alert list (lines 35-133) with:
-        - [ ] `@foreach(var alert in Model.TodayAlerts)` section
-        - [ ] `@foreach(var alert in Model.YesterdayAlerts)` section
-        - [ ] Bind severity class dynamically based on `alert.Severity`
-        - [ ] Bind `alert.Title`, `alert.Message`
-        - [ ] Add form/button for dismiss action
+istoricalChartData to interactive chart
+    - [x] Updated recent alerts section with dynamic binding
+
+- [x] **7.3.2 Update Alerts View**
+    - [x]Replaced hardcoded alerts with grouped Model data
+    - [x] Implemented time-based grouping (Today/Yesterday/Older)
+    - [x] Added severity-based styling and icons
+    - [x] Bound "Mark as Read" actions to AlertService
+    - [x] Added empty state handling
+
+- [x] **7.3.3 Update Transactions View**
+    - [x] Replaced hardcoded transaction list with Model.Transactions
+    - [x] Implemented pagination with Model.CurrentPage/TotalPages
+    - [x] Bound delete action to TransactionService
+    - [x] Added empty state handling
+    - [x] Dynamic styling for Income/Expense types
+
+- [ ] **7.3.4 Update Forecast View**
+    - [ ] Replace static chart with Chart.js forecast visualization
+    - [ ] Bind scenario selector to Model.AllScenarios
+    - [ ] Display confidence intervals
+    - [ ] Update KPI cards with Model metrics
 
 - [ ] **7.3.3 Update Transactions View**
     - [ ] Open `Views/Transactions/Index.cshtml`
