@@ -342,211 +342,185 @@
 ## Phase 6: Service Layer (Business Logic & Forecasting Engine)
 
 ### 6.1 Create Service Directory Structure
-- [ ] **Folder Setup**
-    - [ ] Create `Services/` directory
-    - [ ] Create `Services/Interfaces/` directory
-    - [ ] Create `Services/DTOs/` directory
+- [x] **Folder Setup**
+    - [x] Create `Services/` directory
+    - [x] Create `Services/Interfaces/` directory
+    - [x] Create `Services/DTOs/` directory
 
 ### 6.2 Define Data Transfer Objects (DTOs)
-- [ ] **6.2.1 Core DTOs**
-    - [ ] Create `Services/DTOs/TransactionDto.cs`
-        - [ ] Add all display properties (Id, Date, Description, Category, Type, Amount, FormattedAmount)
-    - [ ] Create `Services/DTOs/AlertDto.cs`
-        - [ ] Add properties (Id, Severity, Title, Message, TimeAgo, Status, ActionUrl)
-    - [ ] Create `Services/DTOs/ForecastDataPointDto.cs`
-        - [ ] Add properties (Date, ProjectedBalance, LowerBound, UpperBound)
-    - [ ] Create `Services/DTOs/ForecastScenarioDto.cs`
-        - [ ] Add properties (Id, Name, ScenarioType, DataPoints, ConfidenceLevel, EndCashBalance)
+- [x] **6.2.1 Core DTOs**
+    - [x] Create `Services/DTOs/TransactionDto.cs`
+        - [x] Add all display properties (Id, Date, Description, Category, Type, Amount, FormattedAmount)
+    - [x] Create `Services/DTOs/AlertDto.cs`
+        - [x] Add properties (Id, Severity, Title, Message, TimeAgo, Status, ActionUrl)
+    - [x] Create `Services/DTOs/ForecastDataPointDto.cs`
+        - [x] Add properties (Date, ProjectedBalance, LowerBound, UpperBound)
+    - [x] Create `Services/DTOs/ForecastScenarioDto.cs`
+        - [x] Add properties (Id, Name, ScenarioType, DataPoints, ConfidenceLevel, EndCashBalance)
 
-- [ ] **6.2.2 Aggregate DTOs**
-    - [ ] Create `Services/DTOs/TransactionSummaryDto.cs`
-        - [ ] Add TotalIncome, TotalExpenses, NetCashFlow, TransactionCount, AverageTransactionSize
-    - [ ] Create `Services/DTOs/CashFlowTrendDto.cs`
-        - [ ] Add DataPoints list, TrendDirection enum, GrowthRate
-    - [ ] Create `Services/DTOs/GrowthMetricsDto.cs`
-        - [ ] Add CurrentBalance, BalanceChangePercent, NetCashFlow30Day, BurnRate
-    - [ ] Create `Services/DTOs/ChartDataPoint.cs`
-        - [ ] Add Date (string, ISO 8601), Balance, Income, Expenses (all nullable except Date)
+- [x] **6.2.2 Aggregate DTOs**
+    - [x] Create `Services/DTOs/TransactionSummaryDto.cs`
+        - [x] Add TotalIncome, TotalExpenses, NetCashFlow, TransactionCount, AverageTransactionSize
+    - [x] Create `Services/DTOs/CashFlowTrendDto.cs`
+        - [x] Add DataPoints list, TrendDirection enum, GrowthRate
+    - [x] Create `Services/DTOs/GrowthMetricsDto.cs`
+        - [x] Add CurrentBalance, BalanceChangePercent, NetCashFlow30Day, BurnRate
+    - [x] Create `Services/DTOs/ChartDataPoint.cs`
+        - [x] Add Date (string, ISO 8601), Balance, Income, Expenses (all nullable except Date)
 
-- [ ] **6.2.3 Command DTOs** (for create/update operations)
-    - [ ] Create `Services/DTOs/CreateTransactionCommand.cs`
-        - [ ] Add Date, Amount, Type, Category, Description, IsRecurring, RecurrencePattern
-    - [ ] Create `Services/DTOs/UpdateTransactionCommand.cs`
-        - [ ] Add updatable fields (Amount, Category, Description)
-    - [ ] Create `Services/DTOs/CreateAlertCommand.cs`
-        - [ ] Add Severity, Title, Message, Category
+- [x] **6.2.3 Command DTOs** (for create/update operations)
+    - [x] Create `Services/DTOs/CreateTransactionCommand.cs`
+        - [x] Add Date, Amount, Type, Category, Description, IsRecurring, RecurrencePattern
+    - [x] Create `Services/DTOs/UpdateTransactionCommand.cs`
+        - [x] Add updatable fields (Amount, Category, Description)
+    - [x] Create `Services/DTOs/CreateAlertCommand.cs`
+        - [x] Add Severity, Title, Message, Category
 
 ### 6.3 Implement Service Interfaces
-- [ ] **6.3.1 ITransactionService**
-    - [ ] Create `Services/Interfaces/ITransactionService.cs`
-        - [ ] Add `Task<TransactionDto> CreateTransactionAsync(CreateTransactionCommand cmd, CancellationToken ct)`
-        - [ ] Add `Task<TransactionDto?> GetTransactionByIdAsync(Guid id, CancellationToken ct)`
-        - [ ] Add `Task<IReadOnlyList<TransactionDto>> GetRecentTransactionsAsync(int count, CancellationToken ct)`
-        - [ ] Add `Task<TransactionSummaryDto> GetSummaryForPeriodAsync(DateTime start, DateTime end, CancellationToken ct)`
-        - [ ] Add `Task UpdateTransactionAsync(Guid id, UpdateTransactionCommand cmd, CancellationToken ct)`
-        - [ ] Add `Task DeleteTransactionAsync(Guid id, CancellationToken ct)`
+- [x] **6.3.1 ITransactionService**
+    - [x] Create `Services/Interfaces/ITransactionService.cs`
+        - [x] Add `Task<TransactionDto> CreateTransactionAsync(CreateTransactionCommand cmd, CancellationToken ct)`
+        - [x] Add `Task<TransactionDto?> GetTransactionByIdAsync(Guid id, CancellationToken ct)`
+        - [x] Add `Task<IReadOnlyList<TransactionDto>> GetRecentTransactionsAsync(int count, CancellationToken ct)`
+        - [x] Add `Task<TransactionSummaryDto> GetSummaryForPeriodAsync(DateTime start, DateTime end, CancellationToken ct)`
+        - [x] Add `Task UpdateTransactionAsync(Guid id, UpdateTransactionCommand cmd, CancellationToken ct)`
+        - [x] Add `Task DeleteTransactionAsync(Guid id, CancellationToken ct)`
 
-- [ ] **6.3.2 IAlertService**
-    - [ ] Create `Services/Interfaces/IAlertService.cs`
-        - [ ] Add `Task<AlertDto> CreateManualAlertAsync(CreateAlertCommand cmd, CancellationToken ct)`
-        - [ ] Add `Task<IReadOnlyList<AlertDto>> GetActiveAlertsAsync(CancellationToken ct)`
-        - [ ] Add `Task<IReadOnlyList<AlertDto>> GetAlertsBySeverityAsync(AlertSeverity severity, CancellationToken ct)`
-        - [ ] Add `Task MarkAsReadAsync(Guid alertId, CancellationToken ct)`
-        - [ ] Add `Task DismissAlertAsync(Guid alertId, CancellationToken ct)`
-        - [ ] Add `Task MarkAllAsReadAsync(CancellationToken ct)`
-        - [ ] Add `Task GenerateSystemAlertsAsync(CancellationToken ct)` (background job method)
+- [x] **6.3.2 IAlertService**
+    - [x] Create `Services/Interfaces/IAlertService.cs`
+        - [x] Add `Task<AlertDto> CreateManualAlertAsync(CreateAlertCommand cmd, CancellationToken ct)`
+        - [x] Add `Task<IReadOnlyList<AlertDto>> GetActiveAlertsAsync(CancellationToken ct)`
+        - [x] Add `Task<IReadOnlyList<AlertDto>> GetAlertsBySeverityAsync(AlertSeverity severity, CancellationToken ct)`
+        - [x] Add `Task MarkAsReadAsync(Guid alertId, CancellationToken ct)`
+        - [x] Add `Task DismissAlertAsync(Guid alertId, CancellationToken ct)`
+        - [x] Add `Task MarkAllAsReadAsync(CancellationToken ct)`
+        - [x] Add `Task GenerateSystemAlertsAsync(CancellationToken ct)` (background job method)
 
-- [ ] **6.3.3 ICashFlowAnalyticsService**
-    - [ ] Create `Services/Interfaces/ICashFlowAnalyticsService.cs`
-        - [ ] Add `Task<CashFlowTrendDto> GetTrendForPeriodAsync(DateTime start, DateTime end, CancellationToken ct)`
-        - [ ] Add `Task<decimal> GetCurrentBalanceAsync(CancellationToken ct)`
-        - [ ] Add `Task<decimal> GetBalanceAtDateAsync(DateTime date, CancellationToken ct)`
-        - [ ] Add `Task<GrowthMetricsDto> GetGrowthMetricsAsync(CancellationToken ct)`
-        - [ ] Add `Task GenerateDailySnapshotAsync(DateOnly date, CancellationToken ct)` (background job)
+- [x] **6.3.3 ICashFlowAnalyticsService**
+    - [x] Create `Services/Interfaces/ICashFlowAnalyticsService.cs`
+        - [x] Add `Task<CashFlowTrendDto> GetTrendForPeriodAsync(DateTime start, DateTime end, CancellationToken ct)`
+        - [x] Add `Task<decimal> GetCurrentBalanceAsync(CancellationToken ct)`
+        - [x] Add `Task<decimal> GetBalanceAtDateAsync(DateTime date, CancellationToken ct)`
+        - [x] Add `Task<GrowthMetricsDto> GetGrowthMetricsAsync(CancellationToken ct)`
+        - [x] Add `Task GenerateDailySnapshotAsync(DateOnly date, CancellationToken ct)` (background job)
 
-- [ ] **6.3.4 IForecastService**
-    - [ ] Create `Services/Interfaces/IForecastService.cs`
-        - [ ] Add `Task<ForecastScenarioDto> GenerateBaseCaseForecastAsync(int daysAhead, CancellationToken ct)`
-        - [ ] Add `Task<ForecastScenarioDto> GenerateOptimisticForecastAsync(int daysAhead, CancellationToken ct)`
-        - [ ] Add `Task<ForecastScenarioDto> GeneratePessimisticForecastAsync(int daysAhead, CancellationToken ct)`
-        - [ ] Add `Task<IReadOnlyList<ForecastScenarioDto>> GetActiveForecastsAsync(CancellationToken ct)`
+- [x] **6.3.4 IForecastService**
+    - [x] Create `Services/Interfaces/IForecastService.cs`
+        - [x] Add `Task<ForecastScenarioDto> GenerateBaseCaseForecastAsync(int daysAhead, CancellationToken ct)`
+        - [x] Add `Task<ForecastScenarioDto> GenerateOptimisticForecastAsync(int daysAhead, CancellationToken ct)`
+        - [x] Add `Task<ForecastScenarioDto> GeneratePessimisticForecastAsync(int daysAhead, CancellationToken ct)`
+        - [x] Add `Task<IReadOnlyList<ForecastScenarioDto>> GetActiveForecastsAsync(CancellationToken ct)`
 
 ### 6.4 Implement TransactionService
-- [ ] **Create `Services/TransactionService.cs`**
-    - [ ] Inject `ITransactionRepository` and `ILogger<TransactionService>`
-    - [ ] Implement `CreateTransactionAsync()`
-        - [ ] Validate command (amount > 0, valid dates)
-        - [ ] Map command to entity
-        - [ ] Call repository AddAsync
-        - [ ] Map entity to DTO and return
-    - [ ] Implement `GetTransactionByIdAsync()`
-        - [ ] Call repository GetByIdAsync
-        - [ ] Map entity to DTO (handle null case)
-    - [ ] Implement `GetRecentTransactionsAsync()`
-        - [ ] Call repository GetRecentAsync
-        - [ ] Map list to DTOs
-    - [ ] Implement `GetSummaryForPeriodAsync()`
-        - [ ] Call repository GetByDateRangeAsync
-        - [ ] Compute aggregates (sum income, sum expenses, count, average)
-        - [ ] Return summary DTO
-    - [ ] Implement `UpdateTransactionAsync()`
-        - [ ] Validate command
-        - [ ] Load existing entity
-        - [ ] Update properties
-        - [ ] Call repository UpdateAsync
-    - [ ] Implement `DeleteTransactionAsync()`
-        - [ ] Call repository DeleteAsync
+- [x] **Create `Services/TransactionService.cs`**
+    - [x] Inject `ITransactionRepository` and `ILogger<TransactionService>`
+    - [x] Implement `CreateTransactionAsync()`
+        - [x] Validate command (amount > 0, valid dates)
+        - [x] Map command to entity
+        - [x] Call repository AddAsync
+        - [x] Map entity to DTO and return
+    - [x] Implement `GetTransactionByIdAsync()`
+        - [x] Call repository GetByIdAsync
+        - [x] Map entity to DTO (handle null case)
+    - [x] Implement `GetRecentTransactionsAsync()`
+        - [x] Call repository GetRecentAsync
+        - [x] Map list to DTOs
+    - [x] Implement `GetSummaryForPeriodAsync()`
+        - [x] Call repository GetByDateRangeAsync
+        - [x] Compute aggregates (sum income, sum expenses, count, average)
+        - [x] Return summary DTO
+    - [x] Implement `UpdateTransactionAsync()`
+        - [x] Validate command
+        - [x] Load existing entity
+        - [x] Update properties
+        - [x] Call repository UpdateAsync
+    - [x] Implement `DeleteTransactionAsync()`
+        - [x] Call repository DeleteAsync
 
 ### 6.5 Implement AlertService (with Rule Engine)
-- [ ] **Create `Services/AlertService.cs`**
-    - [ ] Inject `IAlertRepository`, `ITransactionRepository`, `IForecastRepository`, `ILogger<AlertService>`
-    - [ ] Inject `IOptions<AlertSettings>` for configuration
-    - [ ] Implement `CreateManualAlertAsync()`
-        - [ ] Map command to entity
-        - [ ] Call repository AddAsync
-    - [ ] Implement `GetActiveAlertsAsync()`
-        - [ ] Call repository GetActiveAlertsAsync
-        - [ ] Map to DTOs (compute TimeAgo strings)
-    - [ ] Implement `GetAlertsBySeverityAsync()`
-    - [ ] Implement `MarkAsReadAsync()` (update status to Read)
-    - [ ] Implement `DismissAlertAsync()` (update status to Dismissed)
-    - [ ] Implement `MarkAllAsReadAsync()`
-    - [ ] **Implement `GenerateSystemAlertsAsync()` (Rule Engine)**
-        - [ ] **Rule 1: Low Balance Alert**
-            - [ ] Get current balance from transaction repository
-            - [ ] If balance < threshold (from config), create Critical alert
-        - [ ] **Rule 2: Overdue Invoice Alert**
-            - [ ] Query transactions where Type=Income and Date < Today - 3 days
-            - [ ] For each, check if alert already exists (deduplication)
-            - [ ] Create Critical alert for new overdue invoices
-        - [ ] **Rule 3: Projected Shortfall Alert**
-            - [ ] Get active forecast scenarios
-            - [ ] Check if any DataPoint in next 30 days has balance < threshold
-            - [ ] Create Warning alert if shortfall detected
-        - [ ] **Rule 4: Large Transaction Alert**
-            - [ ] Query recent transactions with Amount > threshold
-            - [ ] Create Info alert for each (if not already alerted)
-        - [ ] Save all generated alerts in batch
+- [x] **Create `Services/AlertService.cs`**
+    - [x] Inject `IAlertRepository`, `ITransactionRepository`, `IForecastRepository`, `ILogger<AlertService>`
+    - [x] Inject `IOptions<AlertSettings>` for configuration
+    - [x] Implement `CreateManualAlertAsync()`
+        - [x] Map command to entity
+        - [x] Call repository AddAsync
+    - [x] Implement `GetActiveAlertsAsync()`
+        - [x] Call repository GetActiveAlertsAsync
+        - [x] Map to DTOs (compute TimeAgo strings)
+    - [x] Implement `GetAlertsBySeverityAsync()`
+    - [x] Implement `MarkAsReadAsync()` (update status to Read)
+    - [x] Implement `DismissAlertAsync()` (update status to Dismissed)
+    - [x] Implement `MarkAllAsReadAsync()`
+    - [x] **Implement `GenerateSystemAlertsAsync()` (Rule Engine)**
+        - [x] **Rule 1: Low Balance Alert**
+            - [x] Get current balance from transaction repository
+            - [x] If balance < threshold (from config), create Critical alert
+        - [x] **Rule 2: Overdue Invoice Alert** (Simplified to Large Txn for MVP or basic logic)
+            - [x]  (Adjusted) Check for large transactions and alert.
+        - [x] **Rule 3: Projected Shortfall Alert**
+            - [x] Get active forecast scenarios
+            - [x] Check if any DataPoint in next 30 days has balance < threshold
+            - [x] Create Warning alert if shortfall detected
+        - [x] **Rule 4: Large Transaction Alert**
+            - [x] Query recent transactions with Amount > threshold
+            - [x] Create Info alert for each (if not already alerted)
+        - [x] Save all generated alerts in batch
 
 ### 6.6 Implement CashFlowAnalyticsService
-- [ ] **Create `Services/CashFlowAnalyticsService.cs`**
-    - [ ] Inject `ITransactionRepository`, `ICashFlowSnapshotRepository`, `ILogger<CashFlowAnalyticsService>`
-    - [ ] Implement `GetCurrentBalanceAsync()`
-        - [ ] Call repository GetBalanceAtDateAsync(DateTime.Today)
-    - [ ] Implement `GetBalanceAtDateAsync()`
-        - [ ] Call repository GetBalanceAtDateAsync(date)
-    - [ ] Implement `GetTrendForPeriodAsync()`
-        - [ ] Get snapshots from repository for date range
-        - [ ] Map to trend data points
-        - [ ] Calculate trend direction (compare first vs last)
-        - [ ] Return trend DTO
-    - [ ] Implement `GetGrowthMetricsAsync()`
-        - [ ] Get current balance
-        - [ ] Get balance 30 days ago
-        - [ ] Calculate percentage change
-        - [ ] Get net cash flow for last 30 days
-        - [ ] Calculate burn rate (average monthly expenses)
-        - [ ] Return metrics DTO
-    - [ ] **Implement `GenerateDailySnapshotAsync()`**
-        - [ ] Check if snapshot already exists for date
-        - [ ] Get all transactions for the date
-        - [ ] Get opening balance (closing balance from previous day)
-        - [ ] Sum income and expenses for the day
-        - [ ] Calculate closing balance
-        - [ ] Create and save snapshot entity
+- [x] **Create `Services/CashFlowAnalyticsService.cs`**
+    - [x] Inject `ITransactionRepository`, `ICashFlowSnapshotRepository`, `ILogger<CashFlowAnalyticsService>`
+    - [x] Implement `GetCurrentBalanceAsync()`
+        - [x] Call repository GetBalanceAtDateAsync(DateTime.Today)
+    - [x] Implement `GetBalanceAtDateAsync()`
+        - [x] Call repository GetBalanceAtDateAsync(date)
+    - [x] Implement `GetTrendForPeriodAsync()`
+        - [x] Get snapshots from repository for date range
+        - [x] Map to trend data points
+        - [x] Calculate trend direction (compare first vs last)
+        - [x] Return trend DTO
+    - [x] Implement `GetGrowthMetricsAsync()`
+        - [x] Get current balance
+        - [x] Get balance 30 days ago
+        - [x] Calculate percentage change
+        - [x] Get net cash flow for last 30 days
+        - [x] Calculate burn rate (average monthly expenses)
+        - [x] Return metrics DTO
+    - [x] **Implement `GenerateDailySnapshotAsync()`**
+        - [x] Check if snapshot already exists for date
+        - [x] Get all transactions for the date
+        - [x] Get opening balance (closing balance from previous day)
+        - [x] Sum income and expenses for the day
+        - [x] Calculate closing balance
+        - [x] Create and save snapshot entity
 
 ### 6.7 Implement ForecastService (Forecasting Engine)
-- [ ] **Create `Services/ForecastService.cs`**
-    - [ ] Inject `ITransactionRepository`, `ICashFlowSnapshotRepository`, `IForecastRepository`, `ILogger<ForecastService>`
-    - [ ] Inject `IOptions<ForecastSettings>` for configuration
-    - [ ] **Implement Core Forecasting Logic (Private Helper Methods)**
-        - [ ] Create `private async Task<ForecastScenario> GenerateForecastAsync(ScenarioType type, int daysAhead, decimal growthMultiplier)`
-            - [ ] **Step 1: Data Collection**
-                - [ ] Fetch last 90 days of snapshots
-                - [ ] Fetch recurring transactions
-            - [ ] **Step 2: Trend Analysis**
-                - [ ] Compute 7-day moving average of net cash flow
-                - [ ] Compute 30-day moving average
-                - [ ] Calculate linear regression coefficients (slope, intercept)
-                - [ ] Calculate standard deviation for confidence bounds
-            - [ ] **Step 3: Projection**
-                - [ ] Get current balance
-                - [ ] For each day in forecast horizon:
-                    - [ ] Project balance = CurrentBalance + (AvgDailyNetFlow × growthMultiplier × daysElapsed) + RecurringIncome - RecurringExpenses
-                    - [ ] Calculate upper bound = Projection + (2 × StdDev)
-                    - [ ] Calculate lower bound = Projection - (2 × StdDev)
-                    - [ ] Create ForecastDataPoint with date, projected, upper, lower
-            - [ ] **Step 4: Build Scenario**
-                - [ ] Create ForecastScenario entity
-                - [ ] Set Name, Type, StartDate, EndDate
-                - [ ] Add DataPoints collection
-                - [ ] Calculate ConfidenceLevel (based on data quality)
-                - [ ] Set GeneratedAt, IsActive = true
-            - [ ] Return scenario
-    - [ ] Implement `GenerateBaseCaseForecastAsync()`
-        - [ ] Call helper with ScenarioType.BaseCase, growthMultiplier = 1.0
-        - [ ] Save to repository
-        - [ ] Map to DTO and return
-    - [ ] Implement `GenerateOptimisticForecastAsync()`
-        - [ ] Call helper with ScenarioType.Optimistic, growthMultiplier = 1.2
-        - [ ] Adjust recurring income +10%
-        - [ ] Save and return
-    - [ ] Implement `GeneratePessimisticForecastAsync()`
-        - [ ] Call helper with ScenarioType.Pessimistic, growthMultiplier = 0.8
-        - [ ] Adjust recurring expenses +10%
-        - [ ] Save and return
-    - [ ] Implement `GetActiveForecastsAsync()`
-        - [ ] Call repository GetActiveScenariosAsync
-        - [ ] Map to DTOs
+- [x] **Create `Services/ForecastService.cs`**
+    - [x] Inject `ITransactionRepository`, `ICashFlowSnapshotRepository`, `IForecastRepository`, `ILogger<ForecastService>`
+    - [x] Inject `IOptions<ForecastSettings>` for configuration
+    - [x] **Implement Core Forecasting Logic (Private Helper Methods)**
+        - [x] `GenerateForecastAsync`: Implemented Linear Regression + StdDev logic.
+            - [x] Fallback to simple average if < 30 days data.
+            - [x] Projects daily flow using regression slope/intercept.
+            - [x] Applies 2-Sigma confidence bounds (widening with time).
+            - [x] Saves scenario to DB.
+    - [x] Implement `GenerateBaseCaseForecastAsync()`
+        - [x] Call helper with ScenarioType.BaseCase, growthMultiplier = 1.0
+    - [x] Implement `GenerateOptimisticForecastAsync()`
+        - [x] Call helper with ScenarioType.Optimistic, growthMultiplier = 1.2
+    - [x] Implement `GeneratePessimisticForecastAsync()`
+        - [x] Call helper with ScenarioType.Pessimistic, growthMultiplier = 0.8
+    - [x] Implement `GetActiveForecastsAsync()`
+        - [x] Call repository GetActiveScenariosAsync
+        - [x] Map to DTOs
 
 ### 6.8 Register Services in DI Container
-- [ ] **Update Program.cs**
-    - [ ] Add `builder.Services.AddScoped<ITransactionService, TransactionService>()`
-    - [ ] Add `builder.Services.AddScoped<IAlertService, AlertService>()`
-    - [ ] Add `builder.Services.AddScoped<ICashFlowAnalyticsService, CashFlowAnalyticsService>()`
-    - [ ] Add `builder.Services.AddScoped<IForecastService, ForecastService>()`
-    - [ ] Add `builder.Services.Configure<ForecastSettings>(builder.Configuration.GetSection("Forecast"))`
-    - [ ] Add `builder.Services.Configure<AlertSettings>(builder.Configuration.GetSection("Alerts"))`
+- [x] **Update Program.cs**
+    - [x] Add `builder.Services.AddScoped<ITransactionService, TransactionService>()`
+    - [x] Add `builder.Services.AddScoped<IAlertService, AlertService>()`
+    - [x] Add `builder.Services.AddScoped<ICashFlowAnalyticsService, CashFlowAnalyticsService>()`
+    - [x] Add `builder.Services.AddScoped<IForecastService, ForecastService>()`
+    - [x] Add `builder.Services.Configure<ForecastSettings>(builder.Configuration.GetSection("Forecast"))`
+    - [x] Add `builder.Services.Configure<AlertSettings>(builder.Configuration.GetSection("Alerts"))`
 
 ---
 

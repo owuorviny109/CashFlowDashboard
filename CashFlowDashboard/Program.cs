@@ -23,6 +23,16 @@ namespace CashFlowDashboard
             builder.Services.AddScoped<ICashFlowSnapshotRepository, CashFlowSnapshotRepository>();
             builder.Services.AddScoped<IForecastRepository, ForecastRepository>();
 
+            // Register Services
+            builder.Services.AddScoped<CashFlowDashboard.Services.Interfaces.ITransactionService, CashFlowDashboard.Services.TransactionService>();
+            builder.Services.AddScoped<CashFlowDashboard.Services.Interfaces.IAlertService, CashFlowDashboard.Services.AlertService>();
+            builder.Services.AddScoped<CashFlowDashboard.Services.Interfaces.ICashFlowAnalyticsService, CashFlowDashboard.Services.CashFlowAnalyticsService>();
+            builder.Services.AddScoped<CashFlowDashboard.Services.Interfaces.IForecastService, CashFlowDashboard.Services.ForecastService>();
+
+            // Register Configuration
+            builder.Services.Configure<CashFlowDashboard.Configuration.ForecastSettings>(builder.Configuration.GetSection("Forecast"));
+            builder.Services.Configure<CashFlowDashboard.Configuration.AlertSettings>(builder.Configuration.GetSection("Alerts"));
+
             var app = builder.Build();
 
             // Seed Database
