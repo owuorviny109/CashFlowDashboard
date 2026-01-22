@@ -639,11 +639,13 @@ istoricalChartData to interactive chart
     - [x] Added empty state handling
     - [x] Dynamic styling for Income/Expense types
 
-- [ ] **7.3.4 Update Forecast View**
-    - [ ] Replace static chart with Chart.js forecast visualization
-    - [ ] Bind scenario selector to Model.AllScenarios
-    - [ ] Display confidence intervals
-    - [ ] Update KPI cards with Model metrics
+- [x] **7.3.4 Update Forecast View**
+    - [x] Replaced static chart with Chart.js forecast visualization
+    - [x] Bound scenario selector to Model.AllScenarios
+    - [x] Displayed confidence intervals (Upper/Lower bounds)
+    - [x] Updated KPI cards with Model metrics (EndCashBalance, BurnRate, GrowthRate)
+    - [x] Added empty state handling for missing forecast data
+    - [x] Integrated "Generate Forecast" buttons with POST actions
 
 - [ ] **7.3.3 Update Transactions View**
     - [ ] Open `Views/Transactions/Index.cshtml`
