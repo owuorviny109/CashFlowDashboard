@@ -49,6 +49,7 @@ This project maintains a record of significant architectural choices to ensure d
 - [ADR 0002: Server-Side Rendering Strategy](Docs/adr/0002-server-side-rendering-strategy.md)
 - [ADR 0003: Strict ViewModel Pattern](Docs/adr/0003-strict-viewmodel-pattern.md)
 - [ADR 0004: Repository Pattern for Data Access](Docs/adr/0004-repository-pattern-for-data-access.md)
+- [ADR 0005: Service Layer Architecture](Docs/adr/0005-service-layer-architecture.md)
 - [Backend Architecture Specification](Docs/backend-architecture.md)
 
 ## Project Roadmap
