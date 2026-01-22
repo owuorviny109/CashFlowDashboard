@@ -12,10 +12,10 @@
                 <div class="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg">
                     <span class="material-symbols-outlined text-green-600 dark:text-green-400">account_balance</span>
                 </div>
-                <span class="flex items-center text-xs font-bold text-green-600 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">+4.2%</span>
+                <span class="flex items-center text-xs font-bold text-green-600 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-full">@Model.BalanceChangePercent.ToString("P1")</span>
             </div>
             <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Total Cash Balance</p>
-            <h3 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">$1,240,500</h3>
+            <h3 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">@Model.CurrentBalance.ToString("C0")</h3>
         </div>
         <!-- Card 2 -->
         <div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-subtle hover:shadow-card transition-shadow">
@@ -26,7 +26,7 @@
                 <span class="flex items-center text-xs font-bold text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-full">Last 30d</span>
             </div>
             <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Net Cash Flow</p>
-            <h3 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">$85,200</h3>
+            <h3 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">@Model.NetCashFlow30Day.ToString("C0")</h3>
         </div>
         <!-- Card 3 -->
         <div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-subtle hover:shadow-card transition-shadow">
@@ -37,7 +37,7 @@
                 <span class="flex items-center text-xs font-bold text-purple-600 bg-purple-50 dark:bg-purple-900/20 px-2 py-1 rounded-full">Projected</span>
             </div>
             <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Forecast Growth</p>
-            <h3 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">+12.5%</h3>
+            <h3 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">@Model.ForecastGrowth60Day.ToString("P1")</h3>
         </div>
         <!-- Card 4 -->
         <div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-subtle hover:shadow-card transition-shadow">
@@ -48,7 +48,7 @@
                 <span class="flex items-center text-xs font-bold text-red-600 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded-full">Action Needed</span>
             </div>
             <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Active Alerts</p>
-            <h3 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">3 Items</h3>
+            <h3 class="text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">@Model.ActiveAlertCount Items</h3>
         </div>
     </div>
 
@@ -67,42 +67,11 @@
                     <button class="px-3 py-1.5 text-xs font-medium text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">All</button>
                 </div>
             </div>
-            <!-- Large Chart Container -->
+            <!-- Chart Container -->
             <div class="flex-1 w-full min-h-[300px] relative">
-                <svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 800 300">
-                    <!-- Grid Lines -->
-                    <line class="dark:stroke-slate-700" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="800" y1="250" y2="250"></line>
-                    <line class="dark:stroke-slate-700" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="800" y1="175" y2="175"></line>
-                    <line class="dark:stroke-slate-700" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="800" y1="100" y2="100"></line>
-                    <line class="dark:stroke-slate-700" stroke="#e2e8f0" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="800" y1="25" y2="25"></line>
-                    <!-- Gradient Definition -->
-                    <defs>
-                        <lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
-                            <stop offset="0%" stop-color="#266c73" stop-opacity="0.2"></stop>
-                            <stop offset="100%" stop-color="#266c73" stop-opacity="0"></stop>
-                        </lineargradient>
-                    </defs>
-                    <!-- Area Fill (Teal) -->
-                    <path d="M0,200 C100,200 150,100 250,120 C350,140 400,180 500,150 C600,120 650,50 800,80 V250 H0 Z" fill="url(#chartGradient)"></path>
-                    <!-- Line Path 1 (Teal - Inflow) -->
-                    <path d="M0,200 C100,200 150,100 250,120 C350,140 400,180 500,150 C600,120 650,50 800,80" fill="none" stroke="#266c73" stroke-linecap="round" stroke-width="3"></path>
-                    <!-- Line Path 2 (Gray - Outflow) -->
-                    <path d="M0,220 C80,230 180,210 260,220 C360,232 420,240 520,210 C620,180 680,150 800,160" fill="none" stroke="#94a3b8" stroke-dasharray="6 6" stroke-linecap="round" stroke-width="2"></path>
-                    <!-- Data Points Hover Effect Simulation -->
-                    <circle class="dark:stroke-slate-800" cx="500" cy="150" fill="#266c73" r="6" stroke="white" stroke-width="2"></circle>
-                    <rect fill="#1e293b" height="36" rx="6" width="80" x="460" y="100"></rect>
-                    <text fill="white" font-size="12" font-weight="bold" text-anchor="middle" x="500" y="122">$184k</text>
-                </svg>
+                <canvas id="cashFlowChart"></canvas>
             </div>
-            <!-- X Axis Labels -->
-            <div class="flex justify-between mt-4 text-xs font-medium text-slate-400">
-                <span>Jan</span>
-                <span>Feb</span>
-                <span>Mar</span>
-                <span>Apr</span>
-                <span>May</span>
-                <span>Jun</span>
-            </div>
+            <!-- X Axis Labels (handled by Chart.js) -->
         </div>
 
         <!-- Right Column (1/3 width) - Stacked -->
@@ -146,34 +115,194 @@
                     <button class="text-xs text-primary font-bold hover:underline">View All</button>
                 </div>
                 <div class="flex-1 overflow-y-auto p-2">
-                    <!-- Alert Item 1 -->
-                    <div class="flex gap-3 p-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg transition-colors cursor-pointer group">
-                        <div class="mt-1 flex-shrink-0">
-                            <span class="material-symbols-outlined text-red-500 text-sm p-1.5 bg-red-100 dark:bg-red-900/30 rounded-full">priority_high</span>
-                        </div>
-                        <div class="flex flex-col gap-1 min-w-0">
-                            <div class="flex justify-between items-start">
-                                <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-primary transition-colors">Unusual Withdrawal</p>
-                                <span class="text-[10px] text-slate-400 whitespace-nowrap">10m ago</span>
+                    @if (Model.RecentAlerts.Any())
+                    {
+                        @foreach (var alert in Model.RecentAlerts)
+                        {
+                            var iconColor = alert.Severity switch
+                            {
+                                CashFlowDashboard.Models.Enums.AlertSeverity.Critical => "text-red-500 bg-red-100 dark:bg-red-900/30",
+                                CashFlowDashboard.Models.Enums.AlertSeverity.Warning => "text-amber-500 bg-amber-100 dark:bg-amber-900/30",
+                                _ => "text-blue-500 bg-blue-100 dark:bg-blue-900/30"
+                            };
+                            var icon = alert.Severity switch
+                            {
+                                CashFlowDashboard.Models.Enums.AlertSeverity.Critical => "priority_high",
+                                CashFlowDashboard.Models.Enums.AlertSeverity.Warning => "warning",
+                                _ => "info"
+                            };
+                            <div class="flex gap-3 p-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg transition-colors cursor-pointer group">
+                                <div class="mt-1 flex-shrink-0">
+                                    <span class="material-symbols-outlined @iconColor text-sm p-1.5 rounded-full">@icon</span>
+                                </div>
+                                <div class="flex flex-col gap-1 min-w-0">
+                                    <div class="flex justify-between items-start">
+                                        <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-primary transition-colors">@alert.Title</p>
+                                        <span class="text-[10px] text-slate-400 whitespace-nowrap">@alert.TimeAgo</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500 line-clamp-1">@alert.Message</p>
+                                </div>
                             </div>
-                            <p class="text-xs text-slate-500 line-clamp-1">Large transfer detected to unknown account ending in 4421.</p>
+                        }
+                    }
+                    else
+                    {
+                        <div class="p-6 text-center text-slate-400">
+                            <p class="text-sm">No recent alerts</p>
                         </div>
-                    </div>
-                    <!-- Alert Item 2 -->
-                    <div class="flex gap-3 p-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg transition-colors cursor-pointer group">
-                        <div class="mt-1 flex-shrink-0">
-                            <span class="material-symbols-outlined text-amber-500 text-sm p-1.5 bg-amber-100 dark:bg-amber-900/30 rounded-full">schedule</span>
-                        </div>
-                        <div class="flex flex-col gap-1 min-w-0">
-                            <div class="flex justify-between items-start">
-                                <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-primary transition-colors">Q3 Tax Payment Due</p>
-                                <span class="text-[10px] text-slate-400 whitespace-nowrap">Tomorrow</span>
-                            </div>
-                            <p class="text-xs text-slate-500 line-clamp-1">Upcoming scheduled payment of $12,400.</p>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+<script>
+    // Serialize server-side Model data to JavaScript
+    const chartData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.HistoricalChartData));
+    const projectedData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.ProjectedChartData));
+
+    // Extract labels (dates) and dataset values
+    const labels = chartData.map(point => {
+        const date = new Date(point.Date);
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    });
+
+    const balanceData = chartData.map(point => point.Balance);
+    const incomeData = chartData.map(point => point.Income || 0);
+    const expensesData = chartData.map(point => point.Expenses || 0);
+
+    // Initialize Chart.js
+    const ctx = document.getElementById('cashFlowChart').getContext('2d');
+    const cashFlowChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Balance',
+                    data: balanceData,
+                    borderColor: '#266c73',
+                    backgroundColor: 'rgba(38, 108, 115, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    pointBackgroundColor: '#266c73'
+                },
+                {
+                    label: 'Income',
+                    data: incomeData,
+                    borderColor: '#10b981',
+                    backgroundColor: 'transparent',
+                    fill: false,
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    pointHoverRadius: 4
+                },
+                {
+                    label: 'Expenses',
+                    data: expensesData,
+                    borderColor: '#ef4444',
+                    backgroundColor: 'transparent',
+                    fill: false,
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    pointHoverRadius: 4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        usePointStyle: true,
+                        padding: 15,
+                        font: {
+                            size: 12,
+                            family: 'Manrope'
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(30, 41, 59, 0.95)',
+                    titleFont: {
+                        size: 13,
+                        weight: 'bold'
+                    },
+                    bodyFont: {
+                        size: 12
+                    },
+                    padding: 12,
+                    cornerRadius: 8,
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += new Intl.NumberFormat('en-US', {
+                                    style: 'currency',
+                                    currency: 'USD',
+                                    minimumFractionDigits: 0
+                                }).format(context.parsed.y);
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 11,
+                            family: 'Manrope'
+                        }
+                    }
+                },
+                y: {
+                    beginAtZero: false,
+                    grid: {
+                        color: 'rgba(226, 232, 240, 0.3)',
+                        drawBorder: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 11,
+                            family: 'Manrope'
+                        },
+                        callback: function(value) {
+                            return new Intl.NumberFormat('en-US', {
+                                style: 'currency',
+                                currency: 'USD',
+                                minimumFractionDigits: 0,
+                                notation: 'compact',
+                                compactDisplay: 'short'
+                            }).format(value);
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+}
