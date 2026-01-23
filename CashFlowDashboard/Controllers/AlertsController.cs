@@ -47,4 +47,11 @@ public class AlertsController : Controller
         await _alertService.MarkAllAsReadAsync(ct);
         return RedirectToAction(nameof(Index));
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Generate(CancellationToken ct = default)
+    {
+        await _alertService.GenerateSystemAlertsAsync(ct);
+        return RedirectToAction(nameof(Index));
+    }
 }

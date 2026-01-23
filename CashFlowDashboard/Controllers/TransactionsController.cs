@@ -41,11 +41,27 @@ public class TransactionsController : Controller
     {
         if (!ModelState.IsValid)
         {
-            // Return validation errors (Future: AJAX response)
+            var errors = string.Join("; ", ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage));
+            
+            Console.WriteLine($"[Transaction Create Failed] Validation Errors: {errors}");
+            TempData["ErrorMessage"] = $"Could not create transaction: {errors}";
+            
             return RedirectToAction(nameof(Index));
         }
 
-        await _transactionService.CreateTransactionAsync(command, ct);
+        try 
+        {
+            await _transactionService.CreateTransactionAsync(command, ct);
+            TempData["SuccessMessage"] = "Transaction added successfully!";
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[Transaction Create Exception] {ex.Message}");
+            TempData["ErrorMessage"] = $"Error creating transaction: {ex.Message}";
+        }
+
         return RedirectToAction(nameof(Index));
     }
 
