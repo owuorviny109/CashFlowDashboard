@@ -28,7 +28,11 @@ namespace CashFlowDashboard
                 builder.Host.UseSerilog();
 
                 // Add services to the container.
-                builder.Services.AddControllersWithViews();
+                builder.Services.AddControllersWithViews(options =>
+                {
+                    // Register global exception filter for service-layer exceptions
+                    options.Filters.Add<CashFlowDashboard.Filters.GlobalExceptionFilter>();
+                });
 
                 // Register Entity Framework Core DbContext
                 builder.Services.AddDbContext<CashFlowDashboard.Data.CashFlowDbContext>(options =>

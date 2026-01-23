@@ -125,8 +125,12 @@ public sealed class CashFlowDbContext : DbContext
                 .HasPrecision(5, 4); // 0.0000 to 1.0000
             
             // Configure owned collection (ForecastDataPoint)
+            // Owned entities in EF Core require explicit key configuration when using OwnsMany
             entity.OwnsMany(e => e.DataPoints, dataPoint =>
             {
+                // EF Core shadow property for the owned entity's primary key
+                dataPoint.HasKey("Id");
+                
                 dataPoint.Property(p => p.ProjectedBalance)
                     .HasPrecision(18, 2);
                 
