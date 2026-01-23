@@ -5,6 +5,26 @@
 }
 
 <div class="flex flex-col gap-6">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="mb-4 rounded-lg bg-green-50 p-4 text-green-800 dark:bg-green-900/30 dark:text-green-300 border border-green-200 dark:border-green-800">
+            <div class="flex items-center">
+                <span class="material-symbols-outlined mr-2">check_circle</span>
+                <p>@TempData["SuccessMessage"]</p>
+            </div>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="mb-4 rounded-lg bg-red-50 p-4 text-red-800 dark:bg-red-900/30 dark:text-red-300 border border-red-200 dark:border-red-800">
+            <div class="flex items-center">
+                <span class="material-symbols-outlined mr-2">error</span>
+                <p>@TempData["ErrorMessage"]</p>
+            </div>
+        </div>
+    }
+
     <!-- Toolbar -->
     <div class="flex flex-wrap items-end justify-between gap-4">
         <div class="flex gap-2">
@@ -20,7 +40,7 @@
                 <span class="material-symbols-outlined text-[20px]">file_download</span>
                 Export
             </button>
-            <button class="flex items-center gap-2 rounded-lg bg-primary hover:bg-primary-dark text-white px-4 py-2 text-sm font-bold shadow-md transition-all hover:shadow-lg active:scale-95">
+            <button onclick="openModal()" class="flex items-center gap-2 rounded-lg bg-primary hover:bg-primary-dark text-white px-4 py-2 text-sm font-bold shadow-md transition-all hover:shadow-lg active:scale-95">
                 <span class="material-symbols-outlined text-[20px]">add</span>
                 Add Transaction
             </button>
@@ -134,4 +154,100 @@
             </div>
         }
     </div>
+    <!-- Create Transaction Modal -->
+    <div id="createTransactionModal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity" aria-hidden="true" onclick="closeModal()"></div>
+        
+        <!-- Modal Panel -->
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-xl bg-white dark:bg-surface-dark text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg border border-slate-200 dark:border-slate-700">
+                    <form method="post" asp-action="Create" asp-controller="Transactions" class="p-6">
+                        <div class="mb-5 flex items-center justify-between">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white" id="modal-title">New Transaction</h3>
+                            <button type="button" class="text-slate-400 hover:text-slate-500" onclick="closeModal()">
+                                <span class="material-symbols-outlined">close</span>
+                            </button>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <!-- Type Selection -->
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="Type" value="Income" class="peer sr-only" checked>
+                                    <div class="rounded-lg border-2 border-slate-200 dark:border-slate-700 p-3 text-center peer-checked:border-primary peer-checked:bg-primary/5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                                        <span class="block text-sm font-bold text-slate-700 dark:text-slate-200 peer-checked:text-primary">Income</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="Type" value="Expense" class="peer sr-only">
+                                    <div class="rounded-lg border-2 border-slate-200 dark:border-slate-700 p-3 text-center peer-checked:border-red-500 peer-checked:bg-red-500/5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                                        <span class="block text-sm font-bold text-slate-700 dark:text-slate-200 peer-checked:text-red-500">Expense</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Amount -->
+                            <div>
+                                <label for="amount" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Amount</label>
+                                <div class="relative mt-1 rounded-md shadow-sm">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <span class="text-slate-500 sm:text-sm">$</span>
+                                    </div>
+                                    <input type="number" name="Amount" id="amount" step="0.01" class="block w-full rounded-lg border-slate-300 dark:border-slate-600 dark:bg-slate-800 pl-7 py-2 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm" placeholder="0.00" required>
+                                </div>
+                            </div>
+
+                            <!-- Date -->
+                            <div>
+                                <label for="date" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Date</label>
+                                <input type="date" name="Date" id="date" class="block w-full rounded-lg border-slate-300 dark:border-slate-600 dark:bg-slate-800 py-2 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm" value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
+                            </div>
+
+                            <!-- Category -->
+                            <div>
+                                <label for="category" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Category</label>
+                                <select name="Category" id="category" class="block w-full rounded-lg border-slate-300 dark:border-slate-600 dark:bg-slate-800 py-2 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm">
+                                    <option value="Sales">Sales</option>
+                                    <option value="Consulting">Consulting</option>
+                                    <option value="Service">Service</option>
+                                    <option value="Rent">Rent</option>
+                                    <option value="Salaries">Salaries</option>
+                                    <option value="Utilities">Utilities</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Software">Software</option>
+                                    <option value="Hardware">Hardware</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Description -->
+                            <div>
+                                <label for="description" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Description</label>
+                                <input type="text" name="Description" id="description" class="block w-full rounded-lg border-slate-300 dark:border-slate-600 dark:bg-slate-800 py-2 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm" placeholder="e.g. Website payment" required>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex gap-3">
+                            <button type="button" class="flex-1 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700" onclick="closeModal()">Cancel</button>
+                            <button type="submit" class="flex-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Save Transaction</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script>
+        function openModal() {
+            document.getElementById('createTransactionModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('createTransactionModal').classList.add('hidden');
+        }
+    </script>
+}
