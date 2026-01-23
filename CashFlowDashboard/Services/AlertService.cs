@@ -151,7 +151,7 @@ public class AlertService : IAlertService
         
         foreach (var alert in newAlerts)
         {
-            if (!activeAlerts.Any(a => a.TriggeredBy == alert.TriggeredBy && a.GeneratedAt.Date == DateTime.Today))
+            if (!activeAlerts.Any(a => a.TriggeredBy == alert.TriggeredBy && a.GeneratedAt.Date == DateTime.Today && a.Status == AlertStatus.Unread))
             {
                 await _alertRepository.AddAsync(alert, ct);
                  _logger.LogInformation("Generated alert: {Title}", alert.Title);

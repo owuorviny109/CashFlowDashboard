@@ -2,6 +2,7 @@ using CashFlowDashboard.Data.Repositories.Interfaces;
 using CashFlowDashboard.Models.Entities;
 using CashFlowDashboard.Models.Enums;
 using CashFlowDashboard.Services.DTOs;
+using CashFlowDashboard.Services.Exceptions;
 using CashFlowDashboard.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 
@@ -20,25 +21,51 @@ public class TransactionService : ITransactionService
 
     public async Task<TransactionDto> CreateTransactionAsync(CreateTransactionCommand cmd, CancellationToken ct = default)
     {
-        // Server-side ID generation to prevent collisions
+        // Validation: Amount must be positive
+        if (cmd.Amount <= 0)
+        {
+            throw new ValidationException("Transaction amount must be greater than zero.");
+        }
+
+        // Validation: Category is required
+        if (string.IsNullOrWhiteSpace(cmd.Category))
+        {
+            throw new ValidationException("Transaction category is required.");
+        }
+
+        // Validation: Date cannot be in the far future (sanity check)
+        if (cmd.Date > DateTime.UtcNow.AddYears(1))
+        {
+            throw new ValidationException("Transaction date cannot be more than 1 year in the future.");
+        }
+
         _logger.LogInformation("Creating transaction: {Type} {Amount:C} - {Category}", cmd.Type, cmd.Amount, cmd.Category);
 
-        var transaction = new Transaction
+        try
         {
-            Id = Guid.NewGuid(),
-            Date = cmd.Date,
-            Amount = cmd.Amount,
-            Type = cmd.Type,
-            Category = cmd.Category,
-            Description = cmd.Description,
-            IsRecurring = cmd.IsRecurring,
-            RecurrencePattern = cmd.RecurrencePattern,
-            CreatedAt = DateTime.UtcNow
-        };
+            var transaction = new Transaction
+            {
+                Id = Guid.NewGuid(),
+                Date = cmd.Date,
+                Amount = cmd.Amount,
+                Type = cmd.Type,
+                Category = cmd.Category,
+                Description = cmd.Description,
+                IsRecurring = cmd.IsRecurring,
+                RecurrencePattern = cmd.RecurrencePattern,
+                CreatedAt = DateTime.UtcNow
+            };
 
-        await _repository.AddAsync(transaction, ct);
+            await _repository.AddAsync(transaction, ct);
 
-        return ToDto(transaction);
+            _logger.LogInformation("Transaction created successfully with ID {TransactionId}", transaction.Id);
+            return ToDto(transaction);
+        }
+        catch (Exception ex) when (ex is not ValidationException)
+        {
+            _logger.LogError(ex, "Failed to create transaction: {Type} {Amount:C}", cmd.Type, cmd.Amount);
+            throw;
+        }
     }
 
     public async Task<TransactionDto?> GetTransactionByIdAsync(Guid id, CancellationToken ct = default)
@@ -91,7 +118,7 @@ public class TransactionService : ITransactionService
         if (transaction == null)
         {
             _logger.LogWarning("Attempted to update non-existent transaction {Id}", id);
-            throw new KeyNotFoundException($"Transaction with ID {id} not found.");
+            throw new NotFoundException("Transaction", id);
         }
 
         bool modified = false;
