@@ -151,7 +151,9 @@ public class AlertService : IAlertService
         
         foreach (var alert in newAlerts)
         {
-            if (!activeAlerts.Any(a => a.TriggeredBy == alert.TriggeredBy && a.GeneratedAt.Date == DateTime.Today && a.Status == AlertStatus.Unread))
+            // Fix: Check for ANY alert with this trigger today, regadless of Status (Read or Unread).
+            // This prevents re-alerting on issues the user has already acknowledged.
+            if (!activeAlerts.Any(a => a.TriggeredBy == alert.TriggeredBy && a.GeneratedAt.Date == DateTime.Today))
             {
                 await _alertRepository.AddAsync(alert, ct);
                  _logger.LogInformation("Generated alert: {Title}", alert.Title);

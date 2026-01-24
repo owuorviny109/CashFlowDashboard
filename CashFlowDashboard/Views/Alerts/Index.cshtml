@@ -86,11 +86,21 @@
                         </div>
                     </div>
                     <div class="flex items-center md:flex-col justify-center gap-2 p-5 border-t md:border-t-0 md:border-l border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 md:w-48 shrink-0">
-                        <form method="post" asp-action="MarkAsRead" asp-controller="Alerts" asp-route-id="@alert.Id" class="w-full">
-                            <button type="submit" class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white hover:border-primary hover:text-primary transition-colors shadow-sm">
-                                Mark as Read
-                            </button>
-                        </form>
+                        @if (alert.Status == CashFlowDashboard.Models.Enums.AlertStatus.Unread)
+                        {
+                            <form method="post" asp-action="MarkAsRead" asp-controller="Alerts" asp-route-id="@alert.Id" class="w-full">
+                                <button type="submit" class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white hover:border-primary hover:text-primary transition-colors shadow-sm">
+                                    Mark as Read
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                             <span class="flex items-center gap-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                <span class="material-symbols-outlined text-base">check_circle</span>
+                                Read
+                            </span>
+                        }
                     </div>
                 </div>
             }
@@ -121,11 +131,21 @@
                         </div>
                     </div>
                     <div class="flex items-center md:flex-col justify-center gap-2 p-5 border-t md:border-t-0 md:border-l border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 md:w-48 shrink-0">
-                        <form method="post" asp-action="MarkAsRead" asp-controller="Alerts" asp-route-id="@alert.Id" class="w-full">
-                            <button type="submit" class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white hover:border-primary hover:text-primary transition-colors shadow-sm">
-                                Mark as Read
-                            </button>
-                        </form>
+                        @if (alert.Status == CashFlowDashboard.Models.Enums.AlertStatus.Unread)
+                        {
+                            <form method="post" asp-action="MarkAsRead" asp-controller="Alerts" asp-route-id="@alert.Id" class="w-full">
+                                <button type="submit" class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white hover:border-primary hover:text-primary transition-colors shadow-sm">
+                                    Mark as Read
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                             <span class="flex items-center gap-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                <span class="material-symbols-outlined text-base">check_circle</span>
+                                Read
+                            </span>
+                        }
                     </div>
                 </div>
             }
@@ -156,11 +176,21 @@
                         </div>
                     </div>
                     <div class="flex items-center md:flex-col justify-center gap-2 p-5 border-t md:border-t-0 md:border-l border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 md:w-48 shrink-0">
-                        <form method="post" asp-action="MarkAsRead" asp-controller="Alerts" asp-route-id="@alert.Id" class="w-full">
-                            <button type="submit" class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white hover:border-primary hover:text-primary transition-colors shadow-sm">
-                                Mark as Read
-                            </button>
-                        </form>
+                        @if (alert.Status == CashFlowDashboard.Models.Enums.AlertStatus.Unread)
+                        {
+                            <form method="post" asp-action="MarkAsRead" asp-controller="Alerts" asp-route-id="@alert.Id" class="w-full">
+                                <button type="submit" class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold text-slate-900 dark:text-white hover:border-primary hover:text-primary transition-colors shadow-sm">
+                                    Mark as Read
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                             <span class="flex items-center gap-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                                <span class="material-symbols-outlined text-base">check_circle</span>
+                                Read
+                            </span>
+                        }
                     </div>
                 </div>
             }

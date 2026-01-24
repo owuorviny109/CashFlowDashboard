@@ -8,26 +8,34 @@
             <p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Enterprise</p>
         </div>
     </div>
+    @{
+        var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+        var isHome = currentController == "Home";
+        var isTransactions = currentController == "Transactions";
+        var isForecast = currentController == "Forecast";
+        var isAlerts = currentController == "Alerts";
+        var isSettings = currentController == "Settings";
+    }
     <nav class="flex-1 px-4 py-4 flex flex-col gap-1 overflow-y-auto no-scrollbar">
-        <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary dark:text-primary-light group transition-all" 
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg @(isHome ? "bg-primary/10 text-primary dark:text-primary-light" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800") group transition-all" 
            asp-controller="Home" asp-action="Index">
-            <span class="material-symbols-outlined filled">dashboard</span>
-            <span class="text-sm font-bold">Dashboard</span>
+            <span class="material-symbols-outlined @(isHome ? "filled" : "")">dashboard</span>
+            <span class="text-sm @(isHome ? "font-bold" : "font-medium group-hover:text-slate-900 dark:group-hover:text-white")">Dashboard</span>
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all group" 
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg @(isTransactions ? "bg-primary/10 text-primary dark:text-primary-light" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800") group transition-all" 
            asp-controller="Transactions" asp-action="Index">
-            <span class="material-symbols-outlined">receipt_long</span>
-            <span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white">Transactions</span>
+            <span class="material-symbols-outlined @(isTransactions ? "filled" : "")">receipt_long</span>
+            <span class="text-sm @(isTransactions ? "font-bold" : "font-medium group-hover:text-slate-900 dark:group-hover:text-white")">Transactions</span>
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all group" 
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg @(isForecast ? "bg-primary/10 text-primary dark:text-primary-light" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800") group transition-all" 
            asp-controller="Forecast" asp-action="Index">
-            <span class="material-symbols-outlined">trending_up</span> <!-- Changed icon to match forecast intent -->
-            <span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white">Forecast</span>
+            <span class="material-symbols-outlined @(isForecast ? "filled" : "")">trending_up</span>
+            <span class="text-sm @(isForecast ? "font-bold" : "font-medium group-hover:text-slate-900 dark:group-hover:text-white")">Forecast</span>
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all group" 
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg @(isAlerts ? "bg-primary/10 text-primary dark:text-primary-light" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800") group transition-all" 
            asp-controller="Alerts" asp-action="Index">
-            <span class="material-symbols-outlined">notifications</span>
-            <span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white">System Alerts</span>
+            <span class="material-symbols-outlined @(isAlerts ? "filled" : "")">notifications</span>
+            <span class="text-sm @(isAlerts ? "font-bold" : "font-medium group-hover:text-slate-900 dark:group-hover:text-white")">System Alerts</span>
         </a>
         
         <div class="mt-8 mb-2 px-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">Management</div>
@@ -36,10 +44,10 @@
             <span class="material-symbols-outlined">group</span>
             <span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white">Team</span>
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all group" 
+        <a class="flex items-center gap-3 px-4 py-3 rounded-lg @(isSettings ? "bg-primary/10 text-primary dark:text-primary-light" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800") group transition-all" 
            asp-controller="Settings" asp-action="Index">
-            <span class="material-symbols-outlined">settings</span>
-            <span class="text-sm font-medium group-hover:text-slate-900 dark:group-hover:text-white">Settings</span>
+            <span class="material-symbols-outlined @(isSettings ? "filled" : "")">settings</span>
+            <span class="text-sm @(isSettings ? "font-bold" : "font-medium group-hover:text-slate-900 dark:group-hover:text-white")">Settings</span>
         </a>
     </nav>
     <div class="p-4 border-t border-slate-200 dark:border-slate-800">
