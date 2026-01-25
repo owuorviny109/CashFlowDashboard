@@ -7,7 +7,7 @@
 <div class="flex flex-col gap-6">
     @if (TempData["SuccessMessage"] != null)
     {
-        <div class="mb-4 rounded-lg bg-green-50 p-4 text-green-800 dark:bg-green-900/30 dark:text-green-300 border border-green-200 dark:border-green-800">
+        <div id="success-alert" class="mb-4 rounded-lg bg-green-50 p-4 text-green-800 dark:bg-green-900/30 dark:text-green-300 border border-green-200 dark:border-green-800 transition-opacity">
             <div class="flex items-center">
                 <span class="material-symbols-outlined mr-2">check_circle</span>
                 <p>@TempData["SuccessMessage"]</p>
@@ -17,7 +17,7 @@
 
     @if (TempData["ErrorMessage"] != null)
     {
-        <div class="mb-4 rounded-lg bg-red-50 p-4 text-red-800 dark:bg-red-900/30 dark:text-red-300 border border-red-200 dark:border-red-800">
+        <div id="error-alert" class="mb-4 rounded-lg bg-red-50 p-4 text-red-800 dark:bg-red-900/30 dark:text-red-300 border border-red-200 dark:border-red-800 transition-opacity">
             <div class="flex items-center">
                 <span class="material-symbols-outlined mr-2">error</span>
                 <p>@TempData["ErrorMessage"]</p>
@@ -25,26 +25,90 @@
         </div>
     }
 
-    <!-- Toolbar -->
-    <div class="flex flex-wrap items-end justify-between gap-4">
-        <div class="flex gap-2">
-            <div class="relative inline-block text-left">
-                <button class="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white dark:bg-surface-dark px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700" type="button">
-                    This Month
-                    <span class="material-symbols-outlined text-slate-400 text-[20px]">expand_more</span>
-                </button>
+    <!-- Dynamic Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Total Income</p>
+                <p class="text-2xl font-bold text-green-600 dark:text-green-400 mt-1">@Model.Summary.TotalIncome.ToString("C0")</p>
+            </div>
+            <div class="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                <span class="material-symbols-outlined text-green-600 dark:text-green-400">trending_up</span>
             </div>
         </div>
-        <div class="flex items-center gap-3">
-            <button class="flex items-center gap-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-slate-300 dark:border-slate-600 px-4 py-2 text-sm font-bold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
-                <span class="material-symbols-outlined text-[20px]">file_download</span>
-                Export
-            </button>
-            <button onclick="openModal()" class="flex items-center gap-2 rounded-lg bg-primary hover:bg-primary-dark text-white px-4 py-2 text-sm font-bold shadow-md transition-all hover:shadow-lg active:scale-95">
-                <span class="material-symbols-outlined text-[20px]">add</span>
-                Add Transaction
-            </button>
+        <div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Total Expenses</p>
+                <p class="text-2xl font-bold text-red-600 dark:text-red-400 mt-1">@Model.Summary.TotalExpenses.ToString("C0")</p>
+            </div>
+            <div class="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
+                <span class="material-symbols-outlined text-red-600 dark:text-red-400">trending_down</span>
+            </div>
         </div>
+        <div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Net Flow</p>
+                <p class="text-2xl font-bold @(Model.Summary.NetCashFlow >= 0 ? "text-slate-900 dark:text-white" : "text-red-500") mt-1">@Model.Summary.NetCashFlow.ToString("C0")</p>
+            </div>
+            <div class="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                <span class="material-symbols-outlined text-blue-600 dark:text-blue-400">account_balance_wallet</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter & Toolbar -->
+    <div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <form method="get" asp-action="Index" class="flex flex-col lg:flex-row gap-4 items-end">
+            <!-- Search -->
+            <div class="flex-1 w-full">
+                <label for="search" class="block text-xs font-medium text-slate-500 mb-1">Search</label>
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[20px]">search</span>
+                    <input type="text" name="search" value="@Model.SearchTerm" placeholder="Description or Category..." 
+                           class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all">
+                </div>
+            </div>
+
+            <!-- Type Filter -->
+            <div class="w-full lg:w-40">
+                <label for="type" class="block text-xs font-medium text-slate-500 mb-1">Type</label>
+                <select name="type" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none">
+                    <!option value="" @(Model.TypeFilter == null ? "selected" : "")>All Types</!option>
+                    <!option value="Income" @(Model.TypeFilter == "Income" ? "selected" : "")>Income</!option>
+                    <!option value="Expense" @(Model.TypeFilter == "Expense" ? "selected" : "")>Expense</!option>
+                </select>
+            </div>
+
+            <!-- Date Range -->
+            <div class="w-full lg:w-40">
+                <label for="start" class="block text-xs font-medium text-slate-500 mb-1">From</label>
+                <input type="date" name="start" value="@(Model.StartDate?.ToString("yyyy-MM-dd"))" 
+                       class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none">
+            </div>
+            <div class="w-full lg:w-40">
+                <label for="end" class="block text-xs font-medium text-slate-500 mb-1">To</label>
+                <input type="date" name="end" value="@(Model.EndDate?.ToString("yyyy-MM-dd"))" 
+                       class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none">
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-2 w-full lg:w-auto">
+                <button type="submit" class="px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-sm font-bold shadow-md hover:shadow-lg transition-all">
+                    Filter
+                </button>
+                <a asp-action="Index" class="px-4 py-2 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+                    Reset
+                </a>
+            </div>
+
+            <!-- Add/Export (kept from before, pushed to right) -->
+            <div class="flex gap-2 w-full lg:w-auto lg:ml-auto border-l border-slate-200 dark:border-slate-700 pl-4">
+                <button type="button" onclick="openModal()" class="flex items-center gap-2 rounded-lg bg-primary hover:bg-primary-dark text-white px-4 py-2 text-sm font-bold shadow-md transition-all whitespace-nowrap">
+                    <span class="material-symbols-outlined text-[20px]">add</span>
+                    Add
+                </button>
+            </div>
+        </form>
     </div>
 
     <!-- Table Container -->
@@ -66,7 +130,8 @@
                     @foreach (var txn in Model.Transactions)
                     {
                         var isIncome = txn.Type == CashFlowDashboard.Models.Enums.TransactionType.Income;
-                        <tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                        <tr class="group hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer" 
+                            onclick="openEditModal('@txn.Id', '@txn.Description', '@txn.Category', '@txn.Type', '@txn.Amount', '@txn.Date.ToString("yyyy-MM-dd")')">
                             <td class="whitespace-nowrap px-6 py-4 text-sm text-slate-500 dark:text-slate-400">
                                 @txn.Date.ToString("MMM dd, yyyy")
                             </td>
@@ -87,7 +152,7 @@
                             <td class="whitespace-nowrap px-6 py-4 text-right text-sm font-mono font-medium @(isIncome ? "text-primary dark:text-teal-400" : "text-slate-900 dark:text-white")">
                                 @txn.FormattedAmount
                             </td>
-                            <td class="whitespace-nowrap px-6 py-4 text-center">
+                            <td class="whitespace-nowrap px-6 py-4 text-center" onclick="event.stopPropagation()">
                                 <form method="post" asp-action="Delete" asp-controller="Transactions" asp-route-id="@txn.Id" style="display:inline;">
                                     <button type="submit" class="text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
                                         <span class="material-symbols-outlined text-[20px]">delete</span>
@@ -130,15 +195,46 @@
                                     <span class="material-symbols-outlined text-[20px]">chevron_left</span>
                                 </a>
                             }
-                            @for (int i = 1; i <= Model.TotalPages; i++)
-                            {
-                                if (i == Model.CurrentPage)
+                            @{
+                                int window = 2;
+                                int startPage = Math.Max(1, Model.CurrentPage - window);
+                                int endPage = Math.Min(Model.TotalPages, Model.CurrentPage + window);
+
+                                if (startPage > 1)
                                 {
-                                    <a aria-current="page" class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">@i</a>
+                                    <a asp-action="Index" asp-route-page="1" 
+                                       asp-route-search="@Model.SearchTerm" asp-route-type="@Model.TypeFilter" asp-route-start="@Model.StartDate?.ToString("yyyy-MM-dd")" asp-route-end="@Model.EndDate?.ToString("yyyy-MM-dd")"
+                                       class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 focus:z-20 focus:outline-offset-0">1</a>
+                                    
+                                    if (startPage > 2)
+                                    {
+                                        <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-inset ring-slate-300 focus:outline-offset-0">...</span>
+                                    }
                                 }
-                                else
+
+                                for (int i = startPage; i <= endPage; i++)
                                 {
-                                    <a asp-action="Index" asp-route-page="@i" class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 focus:z-20 focus:outline-offset-0">@i</a>
+                                    if (i == Model.CurrentPage)
+                                    {
+                                        <a aria-current="page" class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">@i</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="Index" asp-route-page="@i" 
+                                           asp-route-search="@Model.SearchTerm" asp-route-type="@Model.TypeFilter" asp-route-start="@Model.StartDate?.ToString("yyyy-MM-dd")" asp-route-end="@Model.EndDate?.ToString("yyyy-MM-dd")"
+                                           class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 focus:z-20 focus:outline-offset-0">@i</a>
+                                    }
+                                }
+
+                                if (endPage < Model.TotalPages)
+                                {
+                                    if (endPage < Model.TotalPages - 1)
+                                    {
+                                        <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-inset ring-slate-300 focus:outline-offset-0">...</span>
+                                    }
+                                    <a asp-action="Index" asp-route-page="@Model.TotalPages" 
+                                       asp-route-search="@Model.SearchTerm" asp-route-type="@Model.TypeFilter" asp-route-start="@Model.StartDate?.ToString("yyyy-MM-dd")" asp-route-end="@Model.EndDate?.ToString("yyyy-MM-dd")"
+                                       class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 dark:text-white ring-1 ring-inset ring-slate-300 dark:ring-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 focus:z-20 focus:outline-offset-0">@Model.TotalPages</a>
                                 }
                             }
                             @if (Model.CurrentPage < Model.TotalPages)
@@ -163,7 +259,9 @@
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                 <div class="relative transform overflow-hidden rounded-xl bg-white dark:bg-surface-dark text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg border border-slate-200 dark:border-slate-700">
-                    <form method="post" asp-action="Create" asp-controller="Transactions" class="p-6">
+                    <form method="post" id="transactionForm" asp-action="Create" asp-controller="Transactions" class="p-6">
+                        <input type="hidden" name="id" id="transactionId" />
+                        
                         <div class="mb-5 flex items-center justify-between">
                             <h3 class="text-lg font-bold text-slate-900 dark:text-white" id="modal-title">New Transaction</h3>
                             <button type="button" class="text-slate-400 hover:text-slate-500" onclick="closeModal()">
@@ -175,13 +273,13 @@
                             <!-- Type Selection -->
                             <div class="grid grid-cols-2 gap-3">
                                 <label class="cursor-pointer">
-                                    <input type="radio" name="Type" value="Income" class="peer sr-only" checked>
+                                    <input type="radio" name="Type" value="Income" id="typeIncome" class="peer sr-only" checked>
                                     <div class="rounded-lg border-2 border-slate-200 dark:border-slate-700 p-3 text-center peer-checked:border-primary peer-checked:bg-primary/5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
                                         <span class="block text-sm font-bold text-slate-700 dark:text-slate-200 peer-checked:text-primary">Income</span>
                                     </div>
                                 </label>
                                 <label class="cursor-pointer">
-                                    <input type="radio" name="Type" value="Expense" class="peer sr-only">
+                                    <input type="radio" name="Type" value="Expense" id="typeExpense" class="peer sr-only">
                                     <div class="rounded-lg border-2 border-slate-200 dark:border-slate-700 p-3 text-center peer-checked:border-red-500 peer-checked:bg-red-500/5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
                                         <span class="block text-sm font-bold text-slate-700 dark:text-slate-200 peer-checked:text-red-500">Expense</span>
                                     </div>
@@ -231,7 +329,7 @@
 
                         <div class="mt-6 flex gap-3">
                             <button type="button" class="flex-1 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700" onclick="closeModal()">Cancel</button>
-                            <button type="submit" class="flex-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Save Transaction</button>
+                            <button type="submit" id="submitBtn" class="flex-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Save Transaction</button>
                         </div>
                     </form>
                 </div>
@@ -242,12 +340,70 @@
 
 @section Scripts {
     <script>
+        const modal = document.getElementById('createTransactionModal');
+        const form = document.getElementById('transactionForm');
+        const modalTitle = document.getElementById('modal-title');
+        const submitBtn = document.getElementById('submitBtn');
+
         function openModal() {
-            document.getElementById('createTransactionModal').classList.remove('hidden');
+            // Reset for Create Mode
+            form.reset();
+            form.action = '@Url.Action("Create", "Transactions")';
+            modalTitle.textContent = 'New Transaction';
+            submitBtn.textContent = 'Save Transaction';
+            
+            // Set default date
+            document.getElementById('date').valueAsDate = new Date();
+            
+            modal.classList.remove('hidden');
+        }
+
+        function openEditModal(id, description, category, type, amount, date) {
+            // Set for Edit Mode
+            form.action = '@Url.Action("Edit", "Transactions")';
+            modalTitle.textContent = 'Edit Transaction';
+            submitBtn.textContent = 'Update Transaction';
+            
+            // Populate fields
+            document.getElementById('transactionId').value = id;
+            document.getElementById('description').value = description;
+            document.getElementById('category').value = category;
+            document.getElementById('amount').value = amount;
+            document.getElementById('date').value = date;
+            
+            if (type === 'Income') {
+                document.getElementById('typeIncome').checked = true;
+            } else {
+                document.getElementById('typeExpense').checked = true;
+            }
+            
+            modal.classList.remove('hidden');
         }
 
         function closeModal() {
-            document.getElementById('createTransactionModal').classList.add('hidden');
+            modal.classList.add('hidden');
         }
+
+        // Auto-dismiss alerts
+        document.addEventListener('DOMContentLoaded', function() {
+            const successAlert = document.getElementById('success-alert');
+            const errorAlert = document.getElementById('error-alert');
+
+            if (successAlert) {
+                setTimeout(() => {
+                    successAlert.style.transition = 'opacity 0.5s ease-out';
+                    successAlert.style.opacity = '0';
+                    setTimeout(() => successAlert.remove(), 500);
+                }, 3000);
+            }
+
+            if (errorAlert) {
+                setTimeout(() => {
+                    errorAlert.style.transition = 'opacity 0.5s ease-out';
+                    errorAlert.style.opacity = '0';
+                    setTimeout(() => errorAlert.remove(), 500);
+                }, 5000); // Give errors a bit longer (5s) to be read
+            }
+        });
     </script>
 }

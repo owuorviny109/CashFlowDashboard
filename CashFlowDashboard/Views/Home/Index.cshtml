@@ -59,12 +59,21 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
                     <h3 class="text-lg font-bold text-slate-900 dark:text-white">Cash Flow Analysis</h3>
-                    <p class="text-sm text-slate-500">Inflow vs Outflow over the last 6 months</p>
+                    <p class="text-sm text-slate-500">Inflow vs Outflow over the @(Model.SelectedRange == "6M" ? "last 6 months" : Model.SelectedRange == "1Y" ? "last year" : "all time")</p>
                 </div>
                 <div class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg self-start">
-                    <button class="px-3 py-1.5 text-xs font-bold bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm rounded-md">6M</button>
-                    <button class="px-3 py-1.5 text-xs font-medium text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">1Y</button>
-                    <button class="px-3 py-1.5 text-xs font-medium text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">All</button>
+                    <a asp-action="Index" asp-route-range="6M" 
+                       class="px-3 py-1.5 text-xs font-bold rounded-md transition-all @(Model.SelectedRange == "6M" ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300")">
+                        6M
+                    </a>
+                    <a asp-action="Index" asp-route-range="1Y" 
+                       class="px-3 py-1.5 text-xs font-bold rounded-md transition-all @(Model.SelectedRange == "1Y" ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300")">
+                        1Y
+                    </a>
+                    <a asp-action="Index" asp-route-range="All" 
+                       class="px-3 py-1.5 text-xs font-bold rounded-md transition-all @(Model.SelectedRange == "All" ? "bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm" : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300")">
+                        All
+                    </a>
                 </div>
             </div>
             <!-- Chart Container -->
@@ -112,7 +121,7 @@
             <div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-800 p-0 shadow-subtle flex-1 flex flex-col overflow-hidden">
                 <div class="p-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
                     <h4 class="text-base font-bold text-slate-900 dark:text-white">Recent Alerts</h4>
-                    <button class="text-xs text-primary font-bold hover:underline">View All</button>
+                    <a asp-controller="Alerts" asp-action="Index" class="text-xs text-primary font-bold hover:underline">View All</a>
                 </div>
                 <div class="flex-1 overflow-y-auto p-2">
                     @if (Model.RecentAlerts.Any())

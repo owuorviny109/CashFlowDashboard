@@ -19,7 +19,7 @@
 
     @if (TempData["SuccessMessage"] != null)
     {
-        <div class="p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900/30 text-green-700 dark:text-green-300 flex items-center gap-3 shadow-subtle">
+        <div id="success-alert" class="p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900/30 text-green-700 dark:text-green-300 flex items-center gap-3 shadow-subtle transition-opacity">
             <span class="material-symbols-outlined filled">check_circle</span>
             <span class="text-sm font-bold">@TempData["SuccessMessage"]</span>
         </div>
@@ -27,7 +27,7 @@
 
     @if (TempData["ErrorMessage"] != null)
     {
-        <div class="p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/30 text-red-700 dark:text-red-300 flex items-center gap-3 shadow-subtle">
+        <div id="error-alert" class="p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/30 text-red-700 dark:text-red-300 flex items-center gap-3 shadow-subtle transition-opacity">
             <span class="material-symbols-outlined filled">error</span>
             <span class="text-sm font-bold">@TempData["ErrorMessage"]</span>
         </div>
@@ -103,3 +103,28 @@
         </div>
     </form>
 </div>
+@section Scripts {
+    <script>
+        // Auto-dismiss alerts
+        document.addEventListener('DOMContentLoaded', function() {
+            const successAlert = document.getElementById('success-alert');
+            const errorAlert = document.getElementById('error-alert');
+
+            if (successAlert) {
+                setTimeout(() => {
+                    successAlert.style.transition = 'opacity 0.5s ease-out';
+                    successAlert.style.opacity = '0';
+                    setTimeout(() => successAlert.remove(), 500);
+                }, 3000);
+            }
+
+            if (errorAlert) {
+                setTimeout(() => {
+                    errorAlert.style.transition = 'opacity 0.5s ease-out';
+                    errorAlert.style.opacity = '0';
+                    setTimeout(() => errorAlert.remove(), 500);
+                }, 5000);
+            }
+        });
+    </script>
+}
