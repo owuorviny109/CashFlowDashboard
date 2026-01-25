@@ -2,6 +2,8 @@
 
 **DVHacks 2026 Submission**
 
+**Video Demo:** [▶ Predict Cash Flow Before It Breaks](https://youtu.be/ziwRyxCKAro)
+
 > **Predictive Financial Intelligence for Small Business.**  
 > *Because 82% of small businesses fail due to cash flow problems, not profit.*
 
