@@ -5,6 +5,8 @@
 [![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)](https://www.chartjs.org/)
 [![Hackathon](https://img.shields.io/badge/Hackathon-DVHacks%202026-F9AB00?style=for-the-badge)](https://dvhacks2026.devpost.com/)
 
+**Video Demo:** [▶ Predict Cash Flow Before It Breaks](https://youtu.be/ziwRyxCKAro)
+
 **Submission for [DVHacks 2026](https://dvhacks2026.devpost.com/)**
 
 > **Predictive Financial Intelligence for Small Business.**  
