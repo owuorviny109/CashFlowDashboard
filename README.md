@@ -88,8 +88,8 @@ For a detailed task breakdown, see the [Project Roadmap](Docs/task.md).
 ---
 
 ## References
-[1] U.S. Bank study cited by SCORE.org. "The #1 Reason Small Businesses Fail - Cash Flow".  
-[2] "Average Cost of ERP Systems for Small Business" (Top10ERP.org, Softwhere.co). estimates range significantly, with comprehensive cloud suites often starting at $2,000/mo total cost of ownership.
+[1] U.S. Bank study cited by SCORE.org. "The #1 Reason Small Businesses Fail - Cash Flow". [SCORE.org](https://www.score.org/resource/article/preference-cash-flow-over-profit)
+[2] "Average Cost of ERP Systems for Small Business" (Top10ERP.org, Softwhere.co). Estimates range significantly, with comprehensive cloud suites often starting at $2,000/mo total cost of ownership. [Top10ERP](https://www.top10erp.org/blog/how-much-does-erp-software-cost-subscription-price-guide-2022)
 
 ---
 
