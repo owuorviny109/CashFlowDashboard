@@ -45,9 +45,6 @@ The application performs these core functions:
 *   **Transaction Management**: Forms to enter incomes received and expenses paid (`TransactionsController`).
 *   **Recurring Items**: Architecture supports recurring transaction definitions.
 
-### Reports & Exports
-*   **Downloadable Reports**: Generate PDF/CSV reports for income/expenses and projections.
-
 ## Project Architecture (High-Level)
 
 The code follows a strict **Clean MVC** structure:
@@ -106,6 +103,7 @@ For rapid evaluation and judging:
 ---
 
 ## Future Roadmap
+*   **Reports & Exports:** Generate PDF/CSV reports for income/expenses and projections.
 *   **Bank Feeds:** Plaid integration for automated syncing.
 *   **Tax Vault:** Auto-calculate estimated quarterly tax payments.
 *   **Multi-Tenancy:** SaaS support for Accountants managing multiple clients.
