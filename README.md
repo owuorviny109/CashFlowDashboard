@@ -10,7 +10,7 @@
 > **Predictive Financial Intelligence for Small Business.**  
 > *Because 82% of small businesses fail due to cash flow problems, not profit [1].*
 
-> 📋 **[📄 View Full Submission Presentation →](PRESENTATION.md)**  
+> **[View Full Submission Presentation →](PRESENTATION.md)**  
 > *Complete hackathon submission document with problem statement, solution, technical details, and all rubric requirements.*
 
 ---
