@@ -76,171 +76,171 @@
 ## Phase 4: Domain Layer (Core Entity Models)
 
 ### 4.1 Create Domain Models Directory Structure
-- [ ] **Folder Setup**
-    - [ ] Create `CashFlowDashboard/Models/Entities/` directory
-    - [ ] Create `CashFlowDashboard/Models/Enums/` directory
-    - [ ] Create `CashFlowDashboard/Models/ValueObjects/` directory
+- [x] **Folder Setup**
+    - [x] Create `CashFlowDashboard/Models/Entities/` directory
+    - [x] Create `CashFlowDashboard/Models/Enums/` directory
+    - [x] Create `CashFlowDashboard/Models/ValueObjects/` directory
 
 ### 4.2 Define Core Enumerations
-- [ ] **4.2.1 Transaction Enums**
-    - [ ] Create `Models/Enums/TransactionType.cs`
-        - [ ] Add enum values: `Income`, `Expense`
-    - [ ] Create `Models/Enums/RecurrencePattern.cs`
-        - [ ] Add enum values: `None`, `Daily`, `Weekly`, `Monthly`, `Quarterly`, `Annually`
+- [x] **4.2.1 Transaction Enums**
+    - [x] Create `Models/Enums/TransactionType.cs`
+        - [x] Add enum values: `Income`, `Expense`
+    - [x] Create `Models/Enums/RecurrencePattern.cs`
+        - [x] Add enum values: `None`, `Daily`, `Weekly`, `Monthly`, `Quarterly`, `Annually`
 
-- [ ] **4.2.2 Alert Enums**
-    - [ ] Create `Models/Enums/AlertSeverity.cs`
-        - [ ] Add enum values: `Critical`, `Warning`, `Info`, `Success`
-    - [ ] Create `Models/Enums/AlertStatus.cs`
-        - [ ] Add enum values: `Unread`, `Read`, `Dismissed`, `Resolved`
-    - [ ] Create `Models/Enums/AlertCategory.cs`
-        - [ ] Add enum values: `CashFlow`, `Invoice`, `Forecast`, `Security`, `System`
+- [x] **4.2.2 Alert Enums**
+    - [x] Create `Models/Enums/AlertSeverity.cs`
+        - [x] Add enum values: `Critical`, `Warning`, `Info`, `Success`
+    - [x] Create `Models/Enums/AlertStatus.cs`
+        - [x] Add enum values: `Unread`, `Read`, `Dismissed`, `Resolved`
+    - [x] Create `Models/Enums/AlertCategory.cs`
+        - [x] Add enum values: `CashFlow`, `Invoice`, `Forecast`, `Security`, `System`
 
-- [ ] **4.2.3 Forecast Enums**
-    - [ ] Create `Models/Enums/ScenarioType.cs`
-        - [ ] Add enum values: `BaseCase`, `Optimistic`, `Pessimistic`, `Custom`
+- [x] **4.2.3 Forecast Enums**
+    - [x] Create `Models/Enums/ScenarioType.cs`
+        - [x] Add enum values: `BaseCase`, `Optimistic`, `Pessimistic`, `Custom`
 
 ### 4.3 Implement Core Entity Models
-- [ ] **4.3.1 Transaction Entity**
-    - [ ] Create `Models/Entities/Transaction.cs`
-        - [ ] Add `Id` (Guid, PK)
-        - [ ] Add `Date` (DateTime, indexed)
-        - [ ] Add `Amount` (decimal, precision 18,2)
-        - [ ] Add `Type` (TransactionType enum)
-        - [ ] Add `Category` (string, max 100 chars)
-        - [ ] Add `Description` (string, max 500 chars)
-        - [ ] Add `ReferenceId` (string?, nullable)
-        - [ ] Add `IsRecurring` (bool)
-        - [ ] Add `RecurrencePattern` (RecurrencePattern? enum, nullable)
-        - [ ] Add `CreatedAt` (DateTime, audit timestamp)
-        - [ ] Add `ModifiedAt` (DateTime?, nullable, audit timestamp)
-        - [ ] Implement validation attributes (Required, Range, StringLength)
+- [x] **4.3.1 Transaction Entity**
+    - [x] Create `Models/Entities/Transaction.cs`
+        - [x] Add `Id` (Guid, PK)
+        - [x] Add `Date` (DateTime, indexed)
+        - [x] Add `Amount` (decimal, precision 18,2)
+        - [x] Add `Type` (TransactionType enum)
+        - [x] Add `Category` (string, max 100 chars)
+        - [x] Add `Description` (string, max 500 chars)
+        - [x] Add `ReferenceId` (string?, nullable)
+        - [x] Add `IsRecurring` (bool)
+        - [x] Add `RecurrencePattern` (RecurrencePattern? enum, nullable)
+        - [x] Add `CreatedAt` (DateTime, audit timestamp)
+        - [x] Add `ModifiedAt` (DateTime?, nullable, audit timestamp)
+        - [x] Implement validation attributes (Required, Range, StringLength)
 
-- [ ] **4.3.2 Alert Entity**
-    - [ ] Create `Models/Entities/Alert.cs`
-        - [ ] Add `Id` (Guid, PK)
-        - [ ] Add `Severity` (AlertSeverity enum)
-        - [ ] Add `Title` (string, max 200 chars)
-        - [ ] Add `Message` (string, max 2000 chars)
-        - [ ] Add `Category` (AlertCategory enum)
-        - [ ] Add `Status` (AlertStatus enum)
-        - [ ] Add `GeneratedAt` (DateTime, indexed)
-        - [ ] Add `TriggeredBy` (string?, nullable, rule identifier)
-        - [ ] Add `RelatedEntityId` (Guid?, nullable, FK reference)
-        - [ ] Add `ActionUrl` (string?, nullable, deep link)
-        - [ ] Add `ExpiresAt` (DateTime?, nullable, auto-dismiss timestamp)
+- [x] **4.3.2 Alert Entity**
+    - [x] Create `Models/Entities/Alert.cs`
+        - [x] Add `Id` (Guid, PK)
+        - [x] Add `Severity` (AlertSeverity enum)
+        - [x] Add `Title` (string, max 200 chars)
+        - [x] Add `Message` (string, max 2000 chars)
+        - [x] Add `Category` (AlertCategory enum)
+        - [x] Add `Status` (AlertStatus enum)
+        - [x] Add `GeneratedAt` (DateTime, indexed)
+        - [x] Add `TriggeredBy` (string?, nullable, rule identifier)
+        - [x] Add `RelatedEntityId` (Guid?, nullable, FK reference)
+        - [x] Add `ActionUrl` (string?, nullable, deep link)
+        - [x] Add `ExpiresAt` (DateTime?, nullable, auto-dismiss timestamp)
 
-- [ ] **4.3.3 CashFlowSnapshot Entity**
-    - [ ] Create `Models/Entities/CashFlowSnapshot.cs`
-        - [ ] Add `Id` (Guid, PK)
-        - [ ] Add `Date` (DateOnly, indexed, unique)
-        - [ ] Add `OpeningBalance` (decimal, precision 18,2)
-        - [ ] Add `TotalIncome` (decimal, precision 18,2)
-        - [ ] Add `TotalExpenses` (decimal, precision 18,2)
-        - [ ] Add `ClosingBalance` (decimal, computed property or field)
-        - [ ] Add `NetCashFlow` (decimal, computed property or field)
-        - [ ] Add `TransactionCount` (int)
-        - [ ] Add `ComputedAt` (DateTime, timestamp)
+- [x] **4.3.3 CashFlowSnapshot Entity**
+    - [x] Create `Models/Entities/CashFlowSnapshot.cs`
+        - [x] Add `Id` (Guid, PK)
+        - [x] Add `Date` (DateOnly, indexed, unique)
+        - [x] Add `OpeningBalance` (decimal, precision 18,2)
+        - [x] Add `TotalIncome` (decimal, precision 18,2)
+        - [x] Add `TotalExpenses` (decimal, precision 18,2)
+        - [x] Add `ClosingBalance` (decimal, computed property or field)
+        - [x] Add `NetCashFlow` (decimal, computed property or field)
+        - [x] Add `TransactionCount` (int)
+        - [x] Add `ComputedAt` (DateTime, timestamp)
 
-- [ ] **4.3.4 ForecastScenario Entity**
-    - [ ] Create `Models/Entities/ForecastScenario.cs`
-        - [ ] Add `Id` (Guid, PK)
-        - [ ] Add `Name` (string, max 100 chars)
-        - [ ] Add `ScenarioType` (ScenarioType enum)
-        - [ ] Add `StartDate` (DateOnly)
-        - [ ] Add `EndDate` (DateOnly)
-        - [ ] Add `Assumptions` (string, JSON serialized)
-        - [ ] Add `DataPoints` (List<ForecastDataPoint>, owned collection)
-        - [ ] Add `ConfidenceLevel` (decimal, 0.0 to 1.0)
-        - [ ] Add `GeneratedAt` (DateTime)
-        - [ ] Add `IsActive` (bool)
+- [x] **4.3.4 ForecastScenario Entity**
+    - [x] Create `Models/Entities/ForecastScenario.cs`
+        - [x] Add `Id` (Guid, PK)
+        - [x] Add `Name` (string, max 100 chars)
+        - [x] Add `ScenarioType` (ScenarioType enum)
+        - [x] Add `StartDate` (DateOnly)
+        - [x] Add `EndDate` (DateOnly)
+        - [x] Add `Assumptions` (string, JSON serialized)
+        - [x] Add `DataPoints` (List<ForecastDataPoint>, owned collection)
+        - [x] Add `ConfidenceLevel` (decimal, 0.0 to 1.0)
+        - [x] Add `GeneratedAt` (DateTime)
+        - [x] Add `IsActive` (bool)
 
 ### 4.4 Implement Value Objects
-- [ ] **4.4.1 ForecastDataPoint Value Object**
-    - [ ] Create `Models/ValueObjects/ForecastDataPoint.cs`
-        - [ ] Add `Date` (DateOnly)
-        - [ ] Add `ProjectedBalance` (decimal, precision 18,2)
-        - [ ] Add `LowerBound` (decimal, precision 18,2)
-        - [ ] Add `UpperBound` (decimal, precision 18,2)
-        - [ ] Add `Confidence` (decimal, 0.0 to 1.0)
-        - [ ] Mark as `sealed record` (immutable)
+- [x] **4.4.1 ForecastDataPoint Value Object**
+    - [x] Create `Models/ValueObjects/ForecastDataPoint.cs`
+        - [x] Add `Date` (DateOnly)
+        - [x] Add `ProjectedBalance` (decimal, precision 18,2)
+        - [x] Add `LowerBound` (decimal, precision 18,2)
+        - [x] Add `UpperBound` (decimal, precision 18,2)
+        - [x] Add `Confidence` (decimal, 0.0 to 1.0)
+        - [x] Mark as `sealed record` (immutable)
 
 ### 4.5 Setup Entity Framework Core DbContext
-- [ ] **4.5.1 Install EF Core NuGet Packages**
-    - [ ] Run: `dotnet add package Microsoft.EntityFrameworkCore.Sqlite`
-    - [ ] Run: `dotnet add package Microsoft.EntityFrameworkCore.Design`
-    - [ ] Run: `dotnet add package Microsoft.EntityFrameworkCore.Tools`
+- [x] **4.5.1 Install EF Core NuGet Packages**
+    - [x] Run: `dotnet add package Microsoft.EntityFrameworkCore.Sqlite`
+    - [x] Run: `dotnet add package Microsoft.EntityFrameworkCore.Design`
+    - [x] Run: `dotnet add package Microsoft.EntityFrameworkCore.Tools`
 
-- [ ] **4.5.2 Create DbContext**
-    - [ ] Create `Data/` directory
-    - [ ] Create `Data/CashFlowDbContext.cs`
-        - [ ] Inherit from `DbContext`
-        - [ ] Add `DbSet<Transaction> Transactions` property
-        - [ ] Add `DbSet<Alert> Alerts` property
-        - [ ] Add `DbSet<CashFlowSnapshot> Snapshots` property
-        - [ ] Add `DbSet<ForecastScenario> Forecasts` property
-        - [ ] Override `OnModelCreating()` method
+- [x] **4.5.2 Create DbContext**
+    - [x] Create `Data/` directory
+    - [x] Create `Data/CashFlowDbContext.cs`
+        - [x] Inherit from `DbContext`
+        - [x] Add `DbSet<Transaction> Transactions` property
+        - [x] Add `DbSet<Alert> Alerts` property
+        - [x] Add `DbSet<CashFlowSnapshot> Snapshots` property
+        - [x] Add `DbSet<ForecastScenario> Forecasts` property
+        - [x] Override `OnModelCreating()` method
 
-- [ ] **4.5.3 Configure Entity Mappings** (in `OnModelCreating`)
-    - [ ] Configure `Transaction` entity
-        - [ ] Set primary key on `Id`
-        - [ ] Add index on `Date`
-        - [ ] Add composite index on `(Date, Type)`
-        - [ ] Set decimal precision for `Amount` (18,2)
-        - [ ] Set max lengths for string properties
-    - [ ] Configure `Alert` entity
-        - [ ] Set primary key on `Id`
-        - [ ] Add index on `GeneratedAt`
-        - [ ] Add composite index on `(Status, Severity)`
-        - [ ] Set max lengths for string properties
-    - [ ] Configure `CashFlowSnapshot` entity
-        - [ ] Set primary key on `Id`
-        - [ ] Add unique index on `Date`
-        - [ ] Set decimal precision for all balance fields (18,2)
-    - [ ] Configure `ForecastScenario` entity
-        - [ ] Set primary key on `Id`
-        - [ ] Configure owned collection `DataPoints` (EF Core owned type)
-        - [ ] Set decimal precision for `ConfidenceLevel`
+- [x] **4.5.3 Configure Entity Mappings** (in `OnModelCreating`)
+    - [x] Configure `Transaction` entity
+        - [x] Set primary key on `Id`
+        - [x] Add index on `Date`
+        - [x] Add composite index on `(Date, Type)`
+        - [x] Set decimal precision for `Amount` (18,2)
+        - [x] Set max lengths for string properties
+    - [x] Configure `Alert` entity
+        - [x] Set primary key on `Id`
+        - [x] Add index on `GeneratedAt`
+        - [x] Add composite index on `(Status, Severity)`
+        - [x] Set max lengths for string properties
+    - [x] Configure `CashFlowSnapshot` entity
+        - [x] Set primary key on `Id`
+        - [x] Add unique index on `Date`
+        - [x] Set decimal precision for all balance fields (18,2)
+    - [x] Configure `ForecastScenario` entity
+        - [x] Set primary key on `Id`
+        - [x] Configure owned collection `DataPoints` (EF Core owned type)
+        - [x] Set decimal precision for `ConfidenceLevel`
 
 ### 4.6 Configure Database Connection
-- [ ] **4.6.1 Update Configuration File**
-    - [ ] Open `appsettings.json`
-    - [ ] Add `ConnectionStrings` section
-        - [ ] Add `DefaultConnection`: `"Data Source=cashflow.db"`
-    - [ ] Add `Forecast` section with settings (DefaultHorizonDays, etc.)
-    - [ ] Add `Alerts` section with thresholds (LowBalanceThreshold, etc.)
+- [x] **4.6.1 Update Configuration File**
+    - [x] Open `appsettings.json`
+    - [x] Add `ConnectionStrings` section
+        - [x] Add `DefaultConnection`: `"Data Source=cashflow.db"`
+    - [x] Add `Forecast` section with settings (DefaultHorizonDays, etc.)
+    - [x] Add `Alerts` section with thresholds (LowBalanceThreshold, etc.)
 
-- [ ] **4.6.2 Register DbContext in DI Container**
-    - [ ] Open `Program.cs`
-    - [ ] Add `builder.Services.AddDbContext<CashFlowDbContext>()` before `builder.Build()`
-    - [ ] Configure SQLite with connection string from config
+- [x] **4.6.2 Register DbContext in DI Container**
+    - [x] Open `Program.cs`
+    - [x] Add `builder.Services.AddDbContext<CashFlowDbContext>()` before `builder.Build()`
+    - [x] Configure SQLite with connection string from config
 
 ### 4.7 Create Initial Database Migration
-- [ ] **4.7.1 Generate Migration**
-    - [ ] Run: `dotnet ef migrations add InitialCreate -o Data/Migrations`
-    - [ ] Verify migration file created in `Data/Migrations/`
-    - [ ] Review Up/Down migration scripts
+- [x] **4.7.1 Generate Migration**
+    - [x] Run: `dotnet ef migrations add InitialCreate -o Data/Migrations`
+    - [x] Verify migration file created in `Data/Migrations/`
+    - [x] Review Up/Down migration scripts
 
-- [ ] **4.7.2 Apply Migration**
-    - [ ] Run: `dotnet ef database update`
-    - [ ] Verify `cashflow.db` file created in project root
-    - [ ] Inspect database schema using SQLite browser (optional)
+- [x] **4.7.2 Apply Migration**
+    - [x] Run: `dotnet ef database update`
+    - [x] Verify `cashflow.db` file created in project root
+    - [x] Inspect database schema using SQLite browser (optional)
 
 ### 4.8 Implement Data Seeding
-- [ ] **4.8.1 Create Seed Data Class**
-    - [ ] Create `Data/DataSeeder.cs`
-        - [ ] Add static method `SeedAsync(CashFlowDbContext context)`
-        - [ ] Check if database already has data (early return if seeded)
-        - [ ] Create sample transactions (5-10 records: mix of income/expense)
-        - [ ] Create sample alerts (3-5 records: different severities)
-        - [ ] Call `context.SaveChangesAsync()`
+- [x] **4.8.1 Create Seed Data Class**
+    - [x] Create `Data/DataSeeder.cs`
+        - [x] Add static method `SeedAsync(CashFlowDbContext context)`
+        - [x] Check if database already has data (early return if seeded)
+        - [x] Create sample transactions (5-10 records: mix of income/expense)
+        - [x] Create sample alerts (3-5 records: different severities)
+        - [x] Call `context.SaveChangesAsync()`
 
-- [ ] **4.8.2 Integrate Seeding in Startup**
-    - [ ] Open `Program.cs`
-    - [ ] After `app.Build()`, create scope
-    - [ ] Get `CashFlowDbContext` from DI
-    - [ ] Call `await context.Database.EnsureCreatedAsync()`
-    - [ ] Call `await DataSeeder.SeedAsync(context)`
+- [x] **4.8.2 Integrate Seeding in Startup**
+    - [x] Open `Program.cs`
+    - [x] After `app.Build()`, create scope
+    - [x] Get `CashFlowDbContext` from DI
+    - [x] Call `await context.Database.EnsureCreatedAsync()`
+    - [x] Call `await DataSeeder.SeedAsync(context)`
 
 ---
 
