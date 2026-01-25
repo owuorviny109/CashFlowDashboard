@@ -16,6 +16,7 @@ public sealed class DashboardViewModel
     public IReadOnlyList<ChartDataPoint> ProjectedChartData { get; init; } = Array.Empty<ChartDataPoint>();
 
     // Recent Activity
+    public string SelectedRange { get; init; } = "6M";
     public IReadOnlyList<AlertDto> RecentAlerts { get; init; } = Array.Empty<AlertDto>();
     public IReadOnlyList<TransactionDto> RecentTransactions { get; init; } = Array.Empty<TransactionDto>();
 }

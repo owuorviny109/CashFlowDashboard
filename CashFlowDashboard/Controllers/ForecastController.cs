@@ -17,13 +17,18 @@ public class ForecastController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(CancellationToken ct = default)
+    public async Task<IActionResult> Index(ScenarioType? type, CancellationToken ct = default)
     {
         var forecasts = await _forecastService.GetActiveForecastsAsync(ct);
         var metrics = await _analyticsService.GetGrowthMetricsAsync(ct);
 
-        // Select Base Case as primary scenario
-        var activeScenario = forecasts.FirstOrDefault(f => f.ScenarioType == ScenarioType.BaseCase);
+        // Select Scenario logic:
+        // 1. If 'type' is provided, try to find that specific scenario.
+        // 2. If not found or not provided, fallback to BaseCase.
+        // 3. If BaseCase not found, fallback to the first available one.
+        var activeScenario = forecasts.FirstOrDefault(f => f.ScenarioType == type) 
+                             ?? forecasts.FirstOrDefault(f => f.ScenarioType == ScenarioType.BaseCase)
+                             ?? forecasts.FirstOrDefault();
 
         var model = new ForecastViewModel
         {
@@ -35,6 +40,13 @@ public class ForecastController : Controller
         };
 
         return View(model);
+    }
+    
+    [HttpPost]
+    public IActionResult SwitchScenario(ScenarioType type)
+    {
+        // Simply redirect back to Index with the selected type query param
+        return RedirectToAction(nameof(Index), new { type = type });
     }
 
     [HttpPost]

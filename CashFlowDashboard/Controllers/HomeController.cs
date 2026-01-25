@@ -28,14 +28,22 @@ namespace CashFlowDashboard.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index(CancellationToken ct = default)
+        public async Task<IActionResult> Index(string range = "6M", CancellationToken ct = default)
         {
             try
             {
+                // Determine Date Range
+                DateTime startDate = range switch
+                {
+                    "1Y" => DateTime.Today.AddYears(-1),
+                    "All" => DateTime.MinValue,
+                    _ => DateTime.Today.AddMonths(-6) // Default to 6M
+                };
+
                 // Aggregate data from multiple services (Controller orchestration pattern)
                 var metricsTask = _analyticsService.GetGrowthMetricsAsync(ct);
                 var trendTask = _analyticsService.GetTrendForPeriodAsync(
-                    DateTime.Today.AddMonths(-6), 
+                    startDate, 
                     DateTime.Today, 
                     ct);
                 var alertsTask = _alertService.GetActiveAlertsAsync(ct);
@@ -73,6 +81,7 @@ namespace CashFlowDashboard.Controllers
                         Income: null,
                         Expenses: null
                     )).ToList() ?? new List<Services.DTOs.ChartDataPoint>(),
+                    SelectedRange = range,
                     RecentAlerts = alerts.Take(5).ToList(),
                     RecentTransactions = recentTransactions
                 };

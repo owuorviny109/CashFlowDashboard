@@ -14,20 +14,40 @@ public class AlertsController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(CancellationToken ct = default)
+    [HttpGet]
+    public async Task<IActionResult> Index(string filter = "All", int page = 1, CancellationToken ct = default)
     {
         var alerts = await _alertService.GetActiveAlertsAsync(ct);
 
-        // Group by time for better UX (Today/Yesterday/Older pattern)
+        // Apply visual filtering
+        if (filter == "Critical")
+        {
+            alerts = alerts.Where(a => a.Severity == Models.Enums.AlertSeverity.Critical).ToList();
+        }
+        else if (filter == "Warning")
+        {
+            alerts = alerts.Where(a => a.Severity == Models.Enums.AlertSeverity.Warning).ToList();
+        }
+
+        // Pagination
+        int pageSize = 10;
+        int totalCount = alerts.Count;
+        var pagedAlerts = alerts.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+        // Group the PAGED results by time
         var today = DateTime.Today;
         var yesterday = today.AddDays(-1);
 
         var model = new AlertsViewModel
         {
-            TodayAlerts = alerts.Where(a => a.GeneratedAt.Date == today).ToList(),
-            YesterdayAlerts = alerts.Where(a => a.GeneratedAt.Date == yesterday).ToList(),
-            OlderAlerts = alerts.Where(a => a.GeneratedAt.Date < yesterday).ToList(),
-            UnreadCount = alerts.Count(a => a.Status == Models.Enums.AlertStatus.Unread)
+            TodayAlerts = pagedAlerts.Where(a => a.GeneratedAt.Date == today).ToList(),
+            YesterdayAlerts = pagedAlerts.Where(a => a.GeneratedAt.Date == yesterday).ToList(),
+            OlderAlerts = pagedAlerts.Where(a => a.GeneratedAt.Date < yesterday).ToList(),
+            UnreadCount = alerts.Count(a => a.Status == Models.Enums.AlertStatus.Unread), // Count from total, not paged
+            CurrentFilter = filter,
+            TotalCount = totalCount,
+            CurrentPage = page,
+            PageSize = pageSize
         };
 
         return View(model);

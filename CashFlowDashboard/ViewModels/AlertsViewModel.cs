@@ -10,4 +10,11 @@ public sealed class AlertsViewModel
     public IReadOnlyList<AlertDto> OlderAlerts { get; init; } = Array.Empty<AlertDto>();
     
     public int UnreadCount { get; init; }
+    public string CurrentFilter { get; init; } = "All"; // "All", "Critical", "Warning"
+
+    // Pagination
+    public int TotalCount { get; init; }
+    public int CurrentPage { get; init; } = 1;
+    public int PageSize { get; init; } = 10;
+    public int TotalPages => (int)Math.Ceiling((double)TotalCount / PageSize);
 }

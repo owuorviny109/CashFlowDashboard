@@ -23,6 +23,11 @@ namespace CashFlowDashboard
                 Log.Information("Starting web application");
 
                 var builder = WebApplication.CreateBuilder(args);
+                
+                // Force US Culture for Currency (USD)
+                var cultureInfo = new System.Globalization.CultureInfo("en-US");
+                System.Globalization.CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+                System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
                 // Use Serilog for logging
                 builder.Host.UseSerilog();
