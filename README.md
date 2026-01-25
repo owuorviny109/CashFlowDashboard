@@ -94,10 +94,10 @@ For rapid evaluation and judging:
     cd CashFlowDashboard/CashFlowDashboard
     ```
 
-2.  **Run with Seed Data**
-    *Running with `seed-history` instantly populates 6 months of realistic transaction data, ensuring the Forecast Engine functionality is immediately visible.*
+2.  **Run the Application**
+    *The database will be created and seeded automatically with 6 months of realistic transaction data on first run.*
     ```bash
-    dotnet run -- seed-history
+    dotnet run
     ```
 
 3.  **Launch**
