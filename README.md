@@ -11,49 +11,64 @@
 ---
 
 ## The Problem
-Small business owners fly blind. They know what's in the bank *today*, but they have no visibility into *next month*.
-*   **ERP Systems** are too expensive for micro-enterprises (often exceeding $2,000/mo for full suites [2]).
-*   **Spreadsheets** are error-prone and static.
+Small business owners often fly blind. They know what's in the bank *today*, but they have no visibility into *next month*.
+*   **Cash Flow Stress:** Seasonal swings and late payments make cash flow a top stress point, jeopardizing survival [1].
+*   **Financial Uncertainty:** Businesses often don't know when shortfalls will hit until it's too late, leading to poor planning decisions [2].
 *   **Result:** Usable cash runs out unexpectedly, leading to failure.
 
-## The Solution
-**CashFlowDashboard** is an algorithmic financial command center designed to democratize Fortune 500-level forecasting for main street businesses.
+## App Technology Stack (Modern & Practical)
 
-It doesn't just track meaningful data; it **projects** it using statistical analysis to answer the #1 question: *"Will I have enough cash in 30 days?"*
+The application is built using:
+*   **ASP.NET Core MVC** – The modern web framework for C# apps. It combines controllers, views, and models in a clean architecture and runs cross-platform.
+*   **.NET 8 (LTS)** – The recommended long-term support version for stability and future extensibility (cloud, hosting, features).
+*   **Entity Framework Core** – For database access and automated schema migrations.
+*   **Database** – SQLite (for simplicity) or PostgreSQL (production ready).
+*   **Charting UI** – **Chart.js** integrated for visual cash flow reports.
 
-## Key Features
+## App Purpose & Features
 
-### 1. Algorithmic Forecasting Engine
-**Implements** strict **Linear Regression Analysis** to calculate the business's "Burn Rate Slope" and project cash positions 30, 60, and 90 days out.
-*   **Base Case:** Pure statistical trend.
-*   **Optimistic/Pessimistic:** Dynamic "What-If" scenarios configurable in settings.
-*   **Confidence Intervals:** Visualizes volatility risk (Standard Deviation bounds).
+The application performs these core functions:
 
-### 2. Intelligent Alert System
-The system acts as a 24/7 CFO that watches the data:
-*   **Runway Alerts:** "Projected balance drops below $10,000 in 14 days." (Predictive)
-*   **Anomaly Detection:** Flags unusually large transactions or spending spikes.
-*   **Smart Filtering:** Prioritizes Critical issues vs Warnings.
+### Dashboard
+*   **Current Cash Position**: Shows total cash available now.
+*   **Cash Flow Trends**: Visualizes cash in vs. cash out over time (today/weekly/monthly).
+*   **Visual Charts**: Helps owners see financial health at a glance.
 
-### 3. Frictionless Experience
-*   **Glassmorphism UI:** A beautiful, stunning interface built with Tailwind CSS.
-*   **Instant Interaction:** AJAX-powered filtering and modal-based editing (no page reloads).
-*   **Mobile First:** Fully responsive for valid-on-the-go analysis.
+### Forecasting & Alerts
+*   **Future Projections**: Basic future cash flow projection (next 30–90 days).
+*   **Smart Alerts**: Notifications for potential shortfalls or overdue payments.
+*   **Scenario Planning**: Users can toggle between Base, Optimistic, and Pessimistic scenarios.
 
----
+### Simple Data Entry
+*   **Transaction Management**: Forms to enter incomes received and expenses paid.
+*   **Recurring Items**: Architecture supports recurring transaction definitions.
 
-## Technical Architecture
+### Reports & Exports
+*   **Downloadable Reports**: Generate PDF/CSV reports for income/expenses and projections.
 
-Built on the **Principles of Clean Architecture** to ensure enterprise-grade resilience:
+## Project Architecture (High-Level)
 
-*   **Core:** ASP.NET Core 8 MVC (Server-Side Rendering for speed).
-*   **Data Access:** Repository Pattern over Entity Framework Core (SQLite).
-*   **Logic:** Dedicated Service Layer (`ForecastService`, `AlertService`) separating math from presentation.
-*   **Frontend:** Tailwind CSS + Chart.js (Zero JavaScript framework bloat).
+The code follows a strict **Clean MVC** structure:
 
-> **See the Architecture Decision Records (ADRs) for deep dives:**
-> *   [ADR 0005: Service Layer & Forecasting Logic](Docs/adr/0005-service-layer-architecture.md)
-> *   [ADR 0006: Resilience & Configuration](Docs/adr/0006-rearchitecture-and-resilience.md)
+### Models
+Represent your data:
+*   **Transaction** – Holds amount, type (income/expense), date, description.
+*   **CashFlowForecast** – Calculated data for predictions.
+
+### Views
+Use Razor views to render UI:
+*   **Dashboard** – Main visual page with charts and summaries.
+*   **Transactions** – Add/edit list of incomes/expenses with modal interactions.
+*   **Forecast** – Show predicted cash flow with confidence intervals.
+
+### Controllers
+Handle requests:
+*   **DashboardController** – Loads and formats data for visuals.
+*   **TransactionsController** – CRUD operations for incomes/expenses.
+*   **AlertsController** – Generates and filters system alerts.
+
+### Data Access Layer
+*   **Repository Pattern**: Uses Entity Framework Core to manage migrations and queries, abstracting the `DbContext`.
 
 ---
 
@@ -88,8 +103,8 @@ For a detailed task breakdown, see the [Project Roadmap](Docs/task.md).
 ---
 
 ## References
-[1] U.S. Bank study cited by SCORE.org. "The #1 Reason Small Businesses Fail - Cash Flow". [SCORE.org](https://www.score.org/resource/article/preference-cash-flow-over-profit)
-[2] "Average Cost of ERP Systems for Small Business" (Top10ERP.org, Softwhere.co). Estimates range significantly, with comprehensive cloud suites often starting at $2,000/mo total cost of ownership. [Top10ERP](https://www.top10erp.org/blog/how-much-does-erp-software-cost-subscription-price-guide-2022)
+[1] "Cash Flow Management — a Top Stress Point". [QuickBooks](https://quickbooks.intuit.com/r/cash-flow/cash-flow-problems/)
+[2] "Small Business Pain Points: Financial Uncertainty". [PainOnSocial](https://painonsocial.com/blog/small-business-pain-points)
 
 ---
 
