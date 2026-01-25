@@ -80,6 +80,40 @@ public class TransactionService : ITransactionService
         return transactions.Select(ToDto).ToList();
     }
 
+    public async Task<(IReadOnlyList<TransactionDto> Transactions, TransactionSummaryDto Summary)> GetFilteredTransactionsAsync(
+        string? search, 
+        TransactionType? type, 
+        DateTime? start, 
+        DateTime? end, 
+        CancellationToken ct = default)
+    {
+        var transactions = await _repository.SearchAsync(search, type, start, end, ct);
+        
+        // Calculate summary from the filtered results
+        decimal totalIncome = 0;
+        decimal totalExpenses = 0;
+        int count = 0;
+
+        foreach (var txn in transactions)
+        {
+            if (txn.Type == TransactionType.Income)
+                totalIncome += txn.Amount;
+            else
+                totalExpenses += txn.Amount;
+            count++;
+        }
+
+        var summary = new TransactionSummaryDto(
+            TotalIncome: totalIncome,
+            TotalExpenses: totalExpenses,
+            NetCashFlow: totalIncome - totalExpenses,
+            TransactionCount: count,
+            AverageTransactionSize: count > 0 ? (totalIncome + totalExpenses) / count : 0
+        );
+
+        return (transactions.Select(ToDto).ToList(), summary);
+    }
+
     public async Task<TransactionSummaryDto> GetSummaryForPeriodAsync(DateTime start, DateTime end, CancellationToken ct = default)
     {
         var transactions = await _repository.GetByDateRangeAsync(start, end, ct);

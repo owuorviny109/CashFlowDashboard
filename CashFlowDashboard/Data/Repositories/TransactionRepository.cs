@@ -32,6 +32,29 @@ public class TransactionRepository : ITransactionRepository
             .ToListAsync(ct);
     }
 
+    public async Task<IReadOnlyList<Transaction>> SearchAsync(string? searchTerm, TransactionType? type, DateTime? startDate, DateTime? endDate, CancellationToken ct = default)
+    {
+        var query = _context.Transactions.AsNoTracking();
+
+        if (startDate.HasValue)
+            query = query.Where(t => t.Date >= startDate.Value);
+
+        if (endDate.HasValue)
+            query = query.Where(t => t.Date <= endDate.Value);
+
+        if (type.HasValue)
+            query = query.Where(t => t.Type == type.Value);
+
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            var term = searchTerm.ToLower();
+            query = query.Where(t => t.Description.ToLower().Contains(term) || 
+                                     t.Category.ToLower().Contains(term));
+        }
+
+        return await query.OrderByDescending(t => t.Date).ToListAsync(ct);
+    }
+
     // Retrieves the most recent N transactions.
     public async Task<IReadOnlyList<Transaction>> GetRecentAsync(int count, CancellationToken ct = default)
     {

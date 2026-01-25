@@ -1,4 +1,5 @@
 using CashFlowDashboard.Models.Entities;
+using CashFlowDashboard.Models.Enums;
 
 namespace CashFlowDashboard.Data.Repositories.Interfaces;
 
@@ -13,6 +14,11 @@ public interface ITransactionRepository
     // Retrieves a list of transactions within a specified date range.
     // Results are ordered by date descending (newest first).
     Task<IReadOnlyList<Transaction>> GetByDateRangeAsync(DateTime start, DateTime end, CancellationToken ct = default);
+
+    /// <summary>
+    /// Searches transactions based on various criteria.
+    /// </summary>
+    Task<IReadOnlyList<Transaction>> SearchAsync(string? searchTerm, TransactionType? type, DateTime? startDate, DateTime? endDate, CancellationToken ct = default);
 
     // Retrieves the most recent N transactions.
     // Useful for dashboard widgets and recent activity feeds.

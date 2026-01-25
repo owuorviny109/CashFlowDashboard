@@ -21,6 +21,17 @@ public interface ITransactionService
     Task<IReadOnlyList<TransactionDto>> GetRecentTransactionsAsync(int count, CancellationToken ct = default);
 
     /// <summary>
+    /// Retrieves a filtered list of transactions based on search criteria.
+    /// Also returns summary metrics for the filtered set.
+    /// </summary>
+    Task<(IReadOnlyList<TransactionDto> Transactions, TransactionSummaryDto Summary)> GetFilteredTransactionsAsync(
+        string? search, 
+        Models.Enums.TransactionType? type, 
+        DateTime? start, 
+        DateTime? end, 
+        CancellationToken ct = default);
+
+    /// <summary>
     /// Calculates income, expenses, and net balance for a specified date range.
     /// </summary>
     Task<TransactionSummaryDto> GetSummaryForPeriodAsync(DateTime start, DateTime end, CancellationToken ct = default);
