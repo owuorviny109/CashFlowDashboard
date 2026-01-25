@@ -1,7 +1,7 @@
 # 6. Rearchitecture, Configuration, and Resilience
 
-**Date:** 2026-01-22  
-**Status:** Accepted
+
+
 
 ## Context
 The application encountered several critical impediments to stability and usability:
