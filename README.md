@@ -72,6 +72,15 @@ Handle requests:
 ### Data Access Layer
 *   **Repository Pattern**: Uses Entity Framework Core to manage migrations and queries, abstracting the `DbContext`.
 
+### Architecture Decision Records
+For detailed technical decisions and trade-off analysis:
+*   [ADR 0001: Use Tailwind CSS via CDN](Docs/adr/0001-use-tailwind-cdn.md)
+*   [ADR 0002: Server-Side Rendering Strategy](Docs/adr/0002-server-side-rendering-strategy.md)
+*   [ADR 0003: Strict ViewModel Pattern](Docs/adr/0003-strict-viewmodel-pattern.md)
+*   [ADR 0004: Repository Pattern for Data Access](Docs/adr/0004-repository-pattern-for-data-access.md)
+*   [ADR 0005: Service Layer Architecture](Docs/adr/0005-service-layer-architecture.md)
+*   [ADR 0006: Rearchitecture and Resilience](Docs/adr/0006-rearchitecture-and-resilience.md)
+
 ---
 
 ## Getting Started (Run it in 60 seconds)
