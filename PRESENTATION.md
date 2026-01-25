@@ -136,11 +136,15 @@ Small business owners face a critical challenge: **they know what's in the bank 
 *   **Quick Metrics**: Net cash flow (30-day), growth rate, and active alert count.
 *   **Recent Activity**: Latest transactions and alerts for immediate context.
 
+![Dashboard](Docs/Screenshots/dashboard.png)
+
 ### Forecasting Engine
 *   **Multi-Horizon Projections**: 30, 60, and 90-day forecasts with one-click generation.
 *   **Scenario Analysis**: Toggle between Base, Optimistic (+20%), and Pessimistic (-20%) scenarios.
 *   **Confidence Intervals**: Visual upper/lower bounds showing forecast uncertainty (95% confidence).
 *   **Burn Rate Calculation**: Automatic monthly consumption rate analysis.
+
+![Forecast](Docs/Screenshots/forecast.png)
 
 ### Smart Alert System
 *   **Proactive Warnings**: Low balance alerts before cash runs out.
@@ -148,11 +152,22 @@ Small business owners face a critical challenge: **they know what's in the bank 
 *   **Filtering & Management**: Filter by severity, mark as read, pagination support.
 *   **Time-Based Grouping**: Alerts organized by Today, Yesterday, and Older.
 
+![Alerts](Docs/Screenshots/alerts.png)
+
 ### Transaction Management
 *   **CRUD Operations**: Create, read, update, and delete income/expense entries.
 *   **Search & Filter**: Real-time search by description, category, date range, and type.
 *   **Modal Interface**: Smooth, no-reload editing experience.
 *   **Pagination**: Efficient handling of large transaction datasets.
+
+![Transactions](Docs/Screenshots/transactions.png)
+
+### Settings & Configuration
+*   **Runtime Configuration**: Adjust alert thresholds and forecast parameters without code changes.
+*   **User Empowerment**: Business users can calibrate the system to their specific needs.
+*   **Hot Reloading**: Changes take effect immediately without application restart.
+
+![Settings](Docs/Screenshots/settings.png)
 
 ---
 

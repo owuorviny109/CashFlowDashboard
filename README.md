@@ -10,7 +10,7 @@
 > **Predictive Financial Intelligence for Small Business.**  
 > *Because 82% of small businesses fail due to cash flow problems, not profit [1].*
 
-> **[View Full Submission Presentation →](PRESENTATION.md)**  
+> **[View Full Submission Presentation →](PRESENTATION.md)**
 > *Complete hackathon submission document with problem statement, solution, technical details, and all rubric requirements.*
 
 ---
@@ -24,6 +24,28 @@ CashFlowDashboard is a predictive financial intelligence platform for small busi
 *   Multi-scenario forecasting (Base, Optimistic, Pessimistic)
 *   Smart alert system for low balances and anomalies
 *   Transaction management with search and filtering
+
+## Screenshots
+
+### Dashboard
+![Dashboard](Docs/Screenshots/dashboard.png)
+*Real-time cash flow dashboard with interactive charts and key metrics*
+
+### Forecasting Engine
+![Forecast](Docs/Screenshots/forecast.png)
+*Multi-scenario forecasting with confidence intervals (30/60/90-day projections)*
+
+### Transaction Management
+![Transactions](Docs/Screenshots/transactions.png)
+*Complete transaction CRUD with search, filtering, and pagination*
+
+### Smart Alerts
+![Alerts](Docs/Screenshots/alerts.png)
+*Proactive alert system with severity levels and time-based grouping*
+
+### Settings & Configuration
+![Settings](Docs/Screenshots/settings.png)
+*Runtime configuration for alert thresholds and forecast parameters*
 
 ## Technology Stack
 
@@ -60,8 +82,6 @@ For detailed architecture documentation, see [Backend Architecture Spec](Docs/ba
 *   **[PRESENTATION.md](PRESENTATION.md)** – Complete hackathon submission presentation
 *   **[Backend Architecture](Docs/backend-architecture.md)** – Technical specification (850+ lines)
 *   **[Architecture Decision Records](Docs/adr/)** – 6 ADRs documenting technical choices
-*   **[Video Demo Script](Docs/VIDEO_SCRIPT.md)** – Step-by-step demo guide
-
 ---
 
 ## Getting Started (Run it in 60 seconds)
