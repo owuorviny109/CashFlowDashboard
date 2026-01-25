@@ -30,17 +30,17 @@ The application is built using:
 The application performs these core functions:
 
 ### Dashboard
-*   **Current Cash Position**: Shows total cash available now.
-*   **Cash Flow Trends**: Visualizes cash in vs. cash out over time (today/weekly/monthly).
+*   **Current Cash Position**: Shows total cash available now (`DashboardViewModel`).
+*   **Cash Flow Trends**: Visualizes changes over time using `CashFlowAnalyticsService`.
 *   **Visual Charts**: Helps owners see financial health at a glance.
 
 ### Forecasting & Alerts
-*   **Future Projections**: Basic future cash flow projection (next 30–90 days).
-*   **Smart Alerts**: Notifications for potential shortfalls or overdue payments.
-*   **Scenario Planning**: Users can toggle between Base, Optimistic, and Pessimistic scenarios.
+*   **Future Projections**: Projects cash positions 30-90 days out (`ForecastService`).
+*   **Smart Alerts**: Notifications for low balances via `AlertsController`.
+*   **Scenario Planning**: Switch between Base, Optimistic, and Pessimistic scenarios.
 
 ### Simple Data Entry
-*   **Transaction Management**: Forms to enter incomes received and expenses paid.
+*   **Transaction Management**: Forms to enter incomes received and expenses paid (`TransactionsController`).
 *   **Recurring Items**: Architecture supports recurring transaction definitions.
 
 ### Reports & Exports
