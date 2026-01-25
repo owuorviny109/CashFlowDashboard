@@ -16,7 +16,7 @@ Small business owners often fly blind. They know what's in the bank *today*, but
 *   **Financial Uncertainty:** Businesses often don't know when shortfalls will hit until it's too late, leading to poor planning decisions [2].
 *   **Result:** Usable cash runs out unexpectedly, leading to failure.
 
-## App Technology Stack (Modern & Practical)
+## App Technology Stack
 
 The application is built using:
 *   **ASP.NET Core MVC** – The modern web framework for C# apps. It combines controllers, views, and models in a clean architecture and runs cross-platform.
@@ -82,7 +82,7 @@ For rapid evaluation and judging:
     cd CashFlowDashboard/CashFlowDashboard
     ```
 
-2.  **Run with Seed Data (CRITICAL STEP)**
+2.  **Run with Seed Data**
     *Running with `seed-history` instantly populates 6 months of realistic transaction data, ensuring the Forecast Engine functionality is immediately visible.*
     ```bash
     dotnet run -- seed-history
