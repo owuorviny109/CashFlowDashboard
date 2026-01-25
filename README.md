@@ -10,74 +10,57 @@
 > **Predictive Financial Intelligence for Small Business.**  
 > *Because 82% of small businesses fail due to cash flow problems, not profit [1].*
 
+> 📋 **[📄 View Full Submission Presentation →](PRESENTATION.md)**  
+> *Complete hackathon submission document with problem statement, solution, technical details, and all rubric requirements.*
+
 ---
 
-## The Problem
-Small business owners often fly blind. They know what's in the bank *today*, but they have no visibility into *next month*.
-*   **Cash Flow Stress:** Seasonal swings and late payments make cash flow a top stress point, jeopardizing survival [1].
-*   **Financial Uncertainty:** Businesses often don't know when shortfalls will hit until it's too late, leading to poor planning decisions [2].
-*   **Result:** Usable cash runs out unexpectedly, leading to failure.
+## Overview
 
-## App Technology Stack
+CashFlowDashboard is a predictive financial intelligence platform for small businesses. It uses **Linear Regression Analysis** to forecast cash positions 30-90 days ahead, providing early warnings for cash flow shortfalls.
 
-The application is built using:
-*   **ASP.NET Core MVC** – The modern web framework for C# apps. It combines controllers, views, and models in a clean architecture and runs cross-platform.
-*   **.NET 8 (LTS)** – The recommended long-term support version for stability and future extensibility (cloud, hosting, features).
-*   **Entity Framework Core** – For database access and automated schema migrations.
-*   **Database** – SQLite (for simplicity) or PostgreSQL (production ready).
-*   **Charting UI** – **Chart.js** integrated for visual cash flow reports.
+**Key Features:**
+*   Real-time cash flow dashboard with interactive charts
+*   Multi-scenario forecasting (Base, Optimistic, Pessimistic)
+*   Smart alert system for low balances and anomalies
+*   Transaction management with search and filtering
 
-## App Purpose & Features
+## Technology Stack
 
-The application performs these core functions:
+*   **ASP.NET Core MVC 8** – Server-side rendering
+*   **.NET 8 (LTS)** – Long-term support
+*   **Entity Framework Core** – ORM with migrations
+*   **SQLite** – Zero-config database (PostgreSQL-ready)
+*   **Chart.js** – Financial visualizations
+*   **Tailwind CSS** – Modern UI framework
+*   **Serilog** – Structured logging
 
-### Dashboard
-*   **Current Cash Position**: Shows total cash available now (`DashboardViewModel`).
-*   **Cash Flow Trends**: Visualizes changes over time using `CashFlowAnalyticsService`.
-*   **Visual Charts**: Helps owners see financial health at a glance.
+## Architecture
 
-### Forecasting & Alerts
-*   **Future Projections**: Projects cash positions 30-90 days out (`ForecastService`).
-*   **Smart Alerts**: Notifications for low balances via `AlertsController`.
-*   **Scenario Planning**: Switch between Base, Optimistic, and Pessimistic scenarios.
+**Layered Architecture:**
+```
+Controllers (Presentation) → Services (Business Logic) → Repositories (Data Access) → Database
+```
 
-### Simple Data Entry
-*   **Transaction Management**: Forms to enter incomes received and expenses paid (`TransactionsController`).
-*   **Recurring Items**: Architecture supports recurring transaction definitions.
+**Design Patterns:**
+*   Repository Pattern for data abstraction
+*   Service Layer for business logic encapsulation
+*   DTO Pattern for data contracts
+*   ViewModel Pattern for type-safe views
 
-## Project Architecture (High-Level)
+**Core Algorithms:**
+*   **Linear Regression**: `ForecastService.cs` calculates slope/intercept for projections
+*   **Alert Rules**: `AlertService.cs` monitors thresholds and anomalies
+*   **Confidence Intervals**: ±2σ (95% confidence) bounds for forecast uncertainty
 
-The code follows a strict **Clean MVC** structure:
+For detailed architecture documentation, see [Backend Architecture Spec](Docs/backend-architecture.md).
 
-### Models
-Represent your data:
-*   **Transaction** – Holds amount, type (income/expense), date, description.
-*   **CashFlowForecast** – Calculated data for predictions.
+## Documentation
 
-### Views
-Use Razor views to render UI:
-*   **Dashboard** – Main visual page with charts and summaries.
-*   **Transactions** – Add/edit list of incomes/expenses with modal interactions.
-*   **Forecast** – Show predicted cash flow with confidence intervals.
-
-### Controllers
-Handle requests:
-*   **DashboardController** – Loads and formats data for visuals.
-*   **TransactionsController** – CRUD operations for incomes/expenses.
-*   **AlertsController** – Generates and filters system alerts.
-
-### Data Access Layer
-*   **Repository Pattern**: Uses Entity Framework Core to manage migrations and queries, abstracting the `DbContext`.
-
-### Architecture Decision Records
-For detailed technical decisions and trade-off analysis:
-*   [Backend Architecture Specification](Docs/backend-architecture.md)
-*   [ADR 0001: Use Tailwind CSS via CDN](Docs/adr/0001-use-tailwind-cdn.md)
-*   [ADR 0002: Server-Side Rendering Strategy](Docs/adr/0002-server-side-rendering-strategy.md)
-*   [ADR 0003: Strict ViewModel Pattern](Docs/adr/0003-strict-viewmodel-pattern.md)
-*   [ADR 0004: Repository Pattern for Data Access](Docs/adr/0004-repository-pattern-for-data-access.md)
-*   [ADR 0005: Service Layer Architecture](Docs/adr/0005-service-layer-architecture.md)
-*   [ADR 0006: Rearchitecture and Resilience](Docs/adr/0006-rearchitecture-and-resilience.md)
+*   **[PRESENTATION.md](PRESENTATION.md)** – Complete hackathon submission presentation
+*   **[Backend Architecture](Docs/backend-architecture.md)** – Technical specification (850+ lines)
+*   **[Architecture Decision Records](Docs/adr/)** – 6 ADRs documenting technical choices
+*   **[Video Demo Script](Docs/VIDEO_SCRIPT.md)** – Step-by-step demo guide
 
 ---
 
