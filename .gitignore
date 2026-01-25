@@ -49,3 +49,10 @@ secrets.json
 
 # Avoid committing local appsettings produced by tooling
 appsettings.*.Local.json
+
+# Agent folder
+.agent/
+
+# Video script
+VIDEO_SCRIPT.md
+Docs/VIDEO_SCRIPT.md
